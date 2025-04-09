@@ -1,5 +1,5 @@
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
+
 
 genero = [
     ('', 'Seleccionar'),
@@ -9,6 +9,7 @@ genero = [
 
 
 divulgacion = [
+    ('', 'Seleccionar'),
     ('Recomendacion','Recomendacion'),
     ('Redes sociales','Redes sociales'),
     ('Sitio Web', 'Sitio Web'),
@@ -17,6 +18,7 @@ divulgacion = [
 ]
 
 chequeos = [
+    ('', 'Seleccionar'),
     ('Anualmente', 'Anualmente'),
     ('Cada 6 meses', 'Cada 6 meses'),
     ('Solo cuando es necesario','Solo cuando es necesario'),
@@ -24,6 +26,7 @@ chequeos = [
 ]
 
 alimentacion = [
+    ('', 'Seleccionar'),
     ('1 vez','1 vez'),
     ('2 veces','2 veces'),
     ('3 veces','3 veces'),
@@ -33,12 +36,14 @@ alimentacion = [
 ]
 
 alcohol = [
+    ('', 'Seleccionar'),
     ('Nunca','Nunca'),
     ('Ocacionalmente','Ocacionalmente'),
     ('Regularmente','Regularmente'),
 ]
 
 deseo_alimentacion = [
+    ('', 'Seleccionar'),
     ('1','1'),
     ('2','2'),
     ('3','3'),
@@ -48,6 +53,7 @@ deseo_alimentacion = [
 ]
 
 semana_deporte = [
+    ('', 'Seleccionar'),
     ('Menos de 1 hora','Menos de 1 hora'),
     ('1-3 horas','1-3 horas'),
     ('3-5 horas','3-5 horas'),
@@ -55,6 +61,7 @@ semana_deporte = [
 ]
 
 macronutrientes = [
+    ('', 'Seleccionar'),
     ('Papa (Blanca, criolla)','Papa (Blanca, criolla)'),
     ('Arroz (Blanco, integral)','Arroz (Blanco, integral)'),
     ('Arepa de maiz','Arepa de maiz'),
@@ -83,18 +90,21 @@ macronutrientes = [
 ]
 
 suplementacion = [
+    ('', 'Seleccionar'),
     ('Si','Si'),
     ('No','No'),
     ('Depende del suplemento','Depende del suplemento'),
 ]
 
 nivel = [
+    ('', 'Seleccionar'),
     ('Principiante','Principiante (menos de 6 meses de experiencia)'),
     ('Intermedio','Intermedio (6 meses - 2 años de experiencia)'),
     ('Avanzado','Avanzado (más de 2 años de experiencia)'),
 ]
 
 frecuencia = [
+    ('', 'Seleccionar'),
     ('3','3'),
     ('4','4'),
     ('5','5'),

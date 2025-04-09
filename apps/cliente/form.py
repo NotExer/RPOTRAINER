@@ -156,9 +156,9 @@ class Clienteform(forms.ModelForm):
     'fecha_pago': 'Fecha de pago',
     }
         
-    widgets = {
-    'Nombre': forms.TextInput(attrs={'class': 'input-user'}),
-    'Nacimiento': forms.DateInput(attrs={'class': 'custom-date', 'type': 'text', 'id': 'datepicker_nacimiento'}),
+        widgets = {
+        'Nombre': forms.TextInput(attrs={'class': 'input-user'}),
+  'Nacimiento': forms.DateInput(attrs={'class': 'custom-date datepicker','type': 'text','readonly': 'readonly','placeholder': 'Selecciona una fecha'}),
     'Edad': forms.NumberInput(attrs={'class': 'input-user','min': '0','oninput': "this.value = this.value.replace(/[^0-9]/g, '');",'step': '1','inputmode': 'numeric' }),
     'Genero': forms.Select(attrs={'class': 'form-select'}),
     'Correo': forms.EmailInput(attrs={'class': ' input-user'}),
@@ -166,7 +166,7 @@ class Clienteform(forms.ModelForm):
 
 
     'Direccion': forms.Textarea(attrs={'class': ' input-user'}),
-    'Divulgacion': forms.Select(attrs={'class': ' input-user'}),
+    'Divulgacion': forms.Select(attrs={'class': 'form-select'}),
 
     'Altura': forms.NumberInput(attrs={'class': 'input-user'}),
     'Peso': forms.NumberInput(attrs={'class': 'input-user'}),  # Cambié a NumberInput ya que debe ser un número
@@ -182,7 +182,7 @@ class Clienteform(forms.ModelForm):
     'Info_restricciones': forms.TextInput(attrs={'class': 'input-user'}),
     'Descanso': forms.NumberInput(attrs={'class': 'input-user'}),  # Cambié a NumberInput si es para cantidad de horas
     'Fumas': forms.RadioSelect(choices=[(True, "Sí"), (False, "No")], attrs={'class': 'radio-custom'}),
-    'Alcohol': forms.RadioSelect(choices=[(True, "Sí"), (False, "No")], attrs={'class': 'radio-custom'}),
+    'Alcohol': forms.Select(choices=[(True, "Sí"), (False, "No")], attrs={'class': 'input-user'}),
     'Chequeos': forms.Select(attrs={'class': 'input-user'}),
 #======================================================================================================================================================================================
 #INFORMACION 

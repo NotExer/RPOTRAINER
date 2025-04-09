@@ -16,15 +16,14 @@
         {% csrf_token %}
         <div class="form-container">
             {% for field in form %}
-            <div class="form-group">
-                {{ field.label_tag }}
-                {{ field }}
-                {{ field.errors }}
-
-                
+            <div class="form-group {% if field.name|slice:":5" == "Info_" %}info-extra{% endif %}" id="group_{{ field.name }}">
+              {{ field.label_tag }}
+              {{ field }}
+              {{ field.errors }}
             </div>
-        {% endfor %}
-        
+          {% endfor %}
+          
+          
 
         </div>
         <button type="submit" class="btn-enviar">Finalizar</button>

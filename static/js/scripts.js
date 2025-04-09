@@ -140,3 +140,200 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 4000); // Espera 4 segundos antes de empezar a desvanecer
   });
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleMap = {
+    'id_Enfermedad': 'group_Info_enfermedad',
+    'id_Cirugia': 'group_Info_cirugia',
+    'id_Dolor': 'group_Info_dolor',
+    'id_Medicamento': 'group_Info_medicamento',
+    'id_Restricciones': 'group_Info_restricciones',
+    'id_Deporte': 'group_Info_deporte',
+    'id_Nutricion': 'group_Info_nutricion',
+    'id_Alergia': 'group_Info_alergia',
+    'id_Dieta': 'group_Info_dieta',
+    'id_Evitaciones': 'group_Info_evitaciones',
+    'id_Entrenamientos': 'group_Info_entrenamientos',
+    'id_Equipamiento': 'group_Info_equipamiento',
+  };
+
+  for (const triggerId in toggleMap) {
+    const fieldName = triggerId.replace('id_', '');
+    const radios = document.getElementsByName(fieldName);
+    const targetGroup = document.getElementById(toggleMap[triggerId]);
+
+    let anyChecked = false;
+
+    radios.forEach(radio => {
+      // Escuchamos cambios
+      radio.addEventListener('change', () => {
+        if (radio.value === "True" && radio.checked) {
+          targetGroup.style.display = 'block';
+        } else if (radio.value === "False" && radio.checked) {
+          targetGroup.style.display = 'none';
+        }
+      });
+
+      // Al cargar, detectamos si algún radio está marcado
+      if (radio.checked) {
+        anyChecked = true;
+        if (radio.value === "True") {
+          targetGroup.style.display = 'block';
+        } else {
+          targetGroup.style.display = 'none';
+        }
+      }
+    });
+
+    // Si no se ha seleccionado nada, ocultamos el grupo
+    if (!anyChecked && targetGroup) {
+      targetGroup.style.display = 'none';
+    }
+  }
+});
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const dateInputs = document.querySelectorAll('.datepicker');
+
+  dateInputs.forEach(input => {
+    input.addEventListener('focus', () => showCalendar(input));
+  });
+
+  let currentMonth = new Date().getMonth();
+  let currentYear = new Date().getFullYear();
+
+  function showCalendar(input) {
+    removeCalendar();
+
+    const calendar = document.createElement('div');
+    calendar.className = 'custom-calendar';
+
+    const header = document.createElement('div');
+    header.className = 'calendar-header';
+
+    const monthSelect = document.createElement('select');
+    const months = [
+      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
+    months.forEach((month, i) => {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = month;
+      if (i === currentMonth) option.selected = true;
+      monthSelect.appendChild(option);
+    });
+
+    const yearSelect = document.createElement('select');
+    for (let y = currentYear - 100; y <= currentYear + 20; y++) {
+      const option = document.createElement('option');
+      option.value = y;
+      option.textContent = y;
+      if (y === currentYear) option.selected = true;
+      yearSelect.appendChild(option);
+    }
+
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = '×';
+    closeBtn.style.background = 'none';
+    closeBtn.style.color = '#fff';
+    closeBtn.style.border = 'none';
+    closeBtn.style.fontSize = '1rem';
+    closeBtn.style.cursor = 'pointer';
+
+    header.appendChild(monthSelect);
+    header.appendChild(yearSelect);
+    header.appendChild(closeBtn);
+    calendar.appendChild(header);
+
+
+
+    const daysOfWeek = ['L', 'M', 'W', 'J', 'V', 'S', 'D'];
+const dayHeader = document.createElement('div');
+dayHeader.className = 'calendar-grid';
+
+daysOfWeek.forEach(d => {
+  const day = document.createElement('div');
+  day.textContent = d;
+  day.style.fontWeight = 'bold';
+  day.style.textAlign = 'center';
+  day.style.opacity = '0.7';
+  dayHeader.appendChild(day);
+});
+
+calendar.appendChild(dayHeader);
+
+
+
+    const grid = document.createElement('div');
+    grid.className = 'calendar-grid';
+    calendar.appendChild(grid);
+
+    renderDays(grid, currentMonth, currentYear, input);
+
+    monthSelect.addEventListener('change', () => {
+      currentMonth = parseInt(monthSelect.value);
+      renderDays(grid, currentMonth, currentYear, input);
+    });
+
+    yearSelect.addEventListener('change', () => {
+      currentYear = parseInt(yearSelect.value);
+      renderDays(grid, currentMonth, currentYear, input);
+    });
+
+    closeBtn.addEventListener('click', removeCalendar);
+
+    document.body.appendChild(calendar);
+    const rect = input.getBoundingClientRect();
+    calendar.style.top = `${rect.bottom + window.scrollY + 5}px`;
+    calendar.style.left = `${rect.left + window.scrollX}px`;
+
+    document.addEventListener('click', outsideClick);
+  }
+
+  function renderDays(container, month, year, input) {
+    container.innerHTML = "";
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const dayOffset = firstDay === 0 ? 6 : firstDay - 1;
+
+    for (let i = 0; i < dayOffset; i++) {
+      const empty = document.createElement('div');
+      container.appendChild(empty);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const day = document.createElement('div');
+      day.className = 'calendar-day';
+      day.textContent = d;
+      day.addEventListener('click', () => {
+        const selected = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        input.value = selected;
+        removeCalendar();
+      });
+      container.appendChild(day);
+    }
+  }
+
+  function removeCalendar() {
+    const cal = document.querySelector('.custom-calendar');
+    if (cal) cal.remove();
+    document.removeEventListener('click', outsideClick);
+  }
+
+  function outsideClick(e) {
+    if (!e.target.closest('.custom-calendar') && !e.target.classList.contains('datepicker')) {
+      removeCalendar();
+    }
+  }
+});
+
+
