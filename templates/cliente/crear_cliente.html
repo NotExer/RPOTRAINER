@@ -1,0 +1,37 @@
+<!-- cliente/crear_cliente.html -->
+{% extends 'main/index.html' %}
+
+{% block styles %}
+{{ block.super }}
+{% endblock %}
+
+{% block navbar %}
+{{ block.super }}
+{% endblock %}
+
+{% block content %}
+<section class="space">
+    <h3 class="custom-plans-title"><b>{{ step_title }}</b></h3> <!-- Título del paso actual -->
+    <form method="post" class="client-form">
+        {% csrf_token %}
+        <div class="form-container">
+            {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
+
+                
+            </div>
+        {% endfor %}
+        
+
+        </div>
+        <button type="submit" class="btn-enviar">Finalizar</button>
+    </form>
+    
+    
+
+    
+</section>
+{% endblock %}

@@ -1,0 +1,604 @@
+
+<!-- Mx3p!92&kLw# --> 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+
+    <title>Julian Rpo Trainer</title>
+
+    <!-- font icons -->
+    <link rel="icon" type="image/webp" href="{% static 'imgs/logito.webp' %}" sizes="32x32">
+
+
+
+    {% block styles %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% endblock %}
+
+
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+
+    <!-- Page Navbar -->
+    {% block navbar %}
+    <nav id="scrollspy" class="navbar page-navbar navbar-light navbar-expand-md fixed-top" data-spy="affix"
+    data-offset-top="20">
+    <div class="container ">
+        <a class="navbar-brand" href="http://127.0.0.1:8000/#home"><strong class="text-primary">Julian Rpo</strong> <span class="text-dark">Trainer </span>
+            <img src="{% static 'imgs/logo.webp' %}" class="logo_mancuerna"></a>
+
+            <button class="navbar-toggler" type="button" id="menu-button">
+                <div class="menu-icon">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </button>
+    
+
+
+            <div class="collapse navbar-collapse open" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:8000/#">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:8000/#sobremi">Sobre mi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:8000/#planes">Planes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:8000/#testimonios">Testimonios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:8000/#contacto">Contacto</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="http://127.0.0.1:8000/accounts/login/"><button class="custom-plan-button-header">Iniciar session</button></a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav><!-- End of Page Navbar -->
+    {% endblock %}
+
+    <!-- Page Header -->
+    {% block content %}
+    <header id="home" class="header">
+        <div class="overlay"></div>
+        <div class="header-content">
+            <p>Empieza tu cambio físico ahora conmigo</p>
+
+            <h6>Julianrpo Trainer</h6>
+
+
+
+
+            <a href="https://wa.link/mepwbl"><button class="custom-plan-button-header">EMPIEZA AHORA</button></a>
+        </div>
+    </header><!-- End of Page Header -->
+
+
+
+
+
+
+
+    <!-- About Section -->
+    <section id="sobremi">
+        <!-- Container -->
+        <div class="container">
+            <!-- About wrapper -->
+            <div class="about-wrapper">
+                <div class="after">
+                    <h1>SOBRE MI</h1>
+                </div>
+                <div class="content">
+                    <h5 class="title mb-3">Julian Restrepo</h5>
+                    <!-- row -->
+                    <div class="row">
+                        <div class="text-content">
+                            <p> Mi nombre es Julián Restrepo, entrenador personalizado Colombiano, presencial y
+                                    online, Profesional en actividad física y deporte con más de 7 años de experiencia
+                                    en el medio, especialista en recomposición corporal (aumento de masa muscular y
+                                    pérdida de % de grasa), nutrición deportiva y entrenamiento en mujeres, abarco tanto
+                                    gente de Colombia como de otros 5 países más y ahora son más de 1000 personas
+                                    transformadas gracias a su fuerte trabajo y mi acompañamiento.  </p>
+                            <p>Entrenamiento basado en fisiología, biomecánica y nuevas tendencias de entrenamiento,
+                                siempre en miras de mejorar la composición corporal, el rendimiento y la salud, alta
+                                atención al detalle, motivación y control total del proceso, chequeos físicos, medidas
+                                antropométricas y programa de entrenamiento.</p>
+                            <p class="text-center mt-4">Sígueme en mis redes sociales</p>
+                            <!-- Agregada la clase text-center -->
+
+                            <!-- Redes Sociales -->
+                            <div class="social-links text-center mt-2"> <!-- Clase text-center agregada aquí -->
+                                <a href="https://www.instagram.com/julianrpo_trainer/" class="link" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <img src="{% static 'imgs/instagram.webp' %}" alt="Instagram" class="instagram red">
+                                </a>
+                                <a href="https://www.tiktok.com/@julianrpo_trainer" class="link" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <img src="{% static 'imgs/tiktok.webp' %}" alt="TikTok" class="tiktok red">
+                                </a>
+                                <a href="https://www.youtube.com/@julianrpo_trainer" class="link" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <img src="{% static 'imgs/youtube.webp' %}" alt="YouTube" class="youtube red">
+                                </a>
+
+                                <a href="https://www.facebook.com/people/Julian-Restrepo-Trainer/61560546806719/"
+                                    class="link" target="_blank" rel="noopener noreferrer">
+                                    <img src="{% static 'imgs/facebook.webp' %}" alt="Facebook" class="facebook red">
+                                </a>
+                            </div>
+                            <!-- Fin de Redes Sociales -->
+                        </div>
+
+                        <div class="image-content">
+                            <img src="{% static 'imgs/Avatar.webp' %}" class="foto_perfil" alt="Perfil de Julian Restrepo">
+                        </div>
+
+                    </div><!-- End of Row -->
+
+
+
+
+                </div>
+            </div><!-- End of About Wrapper -->
+        </div><!-- End of Container-->
+    </section><!-- End of Section -->
+
+
+
+
+
+
+
+    <!-- section -->
+    <section id="planes" class="custom-plans-section">
+        <h3 class="custom-plans-title">  Planes Personalizados  </h3>
+        <div class="custom-plans-container">
+            <div class="custom-plan">
+                <h3>Entrenamiento personalizado</h3>
+                <p class="custom-plan-subtitle">El plan perfecto para ti</p>
+
+                <p class="custom-current-price">COP$ 40.000/1 Sesión</p>
+                <p class="custom-current-price">COP$ 480.000/12 Sesiones</p>
+                <p class="custom-current-price">COP$ 576.000/16 Sesiones <span class="custom-discount">AHORRA 10%</span>
+                </p>
+                <p class="custom-current-price">COP$ 680.000/20 Sesiones <span class="custom-discount">AHORRA 15%</span>
+                </p>
+
+
+                <a href="https://wa.link/mepwbl"><button class="custom-plan-button">Elegir plan</button></a>
+                <ul class="custom-plan-list">
+                    <li class="lista">Sesión individualizada</li>
+                    <li class="lista">Plan de entrenamiento específico</li>
+                    <li class="lista">Plan nutricional específico</li>
+                    <li class="lista">Evaluación física y seguimiento antropométrico</li>
+                    <li class="lista">Entrenamiento en la comodidad del hogar o gimnasio</li>
+                    <li class="lista">Corrección técnica en tiempo real</li>
+                    <li class="lista">Flexibilidad en sesiones de entrenamiento</li>
+                    <li class="lista">Soporte y asesoría 24/7</li>
+                    <li class="lista">Recursos educativos (Ebooks de suplementación, entrenamiento, nutrición, recetas y
+                        bienestar integral)</li>
+                    <li class="lista">Sesión de masaje (pistola de percusión)</li>
+                    <li class="lista">Termo personalizado</li>
+                    <li class="lista">Plan de entrenamiento para viajes</li>
+                    <li>Descuentos Exclusivos: <br>
+                        10% de descuento en el mes de tu cumpleaños
+                        <br> 10% de descuento por cada referido que se inscriba
+                        <br> 10% de descuento por permanencia continua de 3, 6, 9 o 12 meses
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <div class="custom-plan custom-highlighted">
+                <h3>Asesoría Online 1 a 1</h3>
+                <p class="custom-plan-subtitle">lo mejor si eres principiante</p>
+                <p class="custom-plan-price">
+                </p>
+                <p class="custom-current-price">COP$ 200.000/4 Semanas</p>
+                <p class="custom-current-price">COP$ 420.000/12 Semanas <span class="custom-discount">AHORRA 30%</span>
+                </p>
+                <p class="custom-current-price">COP$ 600.000/21 Semanas <span class="custom-discount">AHORRA 50%</span>
+                </p>
+
+                <a href="https://wa.link/mepwbl"><button class="custom-plan-button">Elegir plan</button></a>
+                <ul class="custom-plan-list">
+                    <li class="lista">Videollamada para evaluación inicial, análisis de composición corporal y
+                        requerimientos nutricionales.</li>
+                    <li class="lista">Videollamada para explicar los planes al detalle.</li>
+                    <li class="lista">Plan de entrenamiento, nutrición y suplementación personalizados.</li>
+                    <li class="lista">Videos explicativos de todos los ejercicios.</li>
+                    <li class="lista">Diario de entrenamiento y nutrición para seguimiento.</li>
+                    <li class="lista">Soporte 24/7 vía WhatsApp</li>
+                    <li class="lista">Recursos educativos (Ebooks de suplementación, entrenamiento, nutrición, recetas y
+                        bienestar integral).</li>
+                    <li class="lista">Plan accesible y fácil de visualizar a través de Google.</li>
+                    <li class="lista">Análisis técnico y corrección de los ejercicios.</li>
+
+                </ul>
+            </div>
+
+
+
+            <div class="custom-plan ">
+                <h3>Entrenamiento Semipersonalizado</h3>
+                <p class="custom-plan-subtitle">El paquete perfecto si quieres compañía en tu entrenamiento</p>
+                <p class="custom-plan-price">
+
+                </p>
+                <p class="custom-current-price">COP$ 45.000/1 Sesión</p>
+                <p class="custom-current-price">COP$ 540.000/12 Sesiones</p>
+                <p class="custom-current-price">COP$ 648.000/16 Sesiones <span class="custom-discount">AHORRA 10%</span>
+                </p>
+                <p class="custom-current-price">COP$ 765.000/20 Sesiones <span class="custom-discount">AHORRA 15%</span>
+                </p>
+                <a href="https://wa.link/mepwbl"><button class="custom-plan-button">Elegir plan</button></a>
+                <ul class="custom-plan-list">
+                    <li class="lista">Sesión de entrenamiento en vivo</li>
+                    <li class="lista">Plan de Entrenamiento Específico</li>
+                    <li class="lista">Plan Nutricional Específico</li>
+                    <li class="lista">Evaluación Física y Seguimiento</li>
+                    <li class="lista">Entrenamiento en la comodidad del hogar o gimnasio</li>
+                    <li class="lista">Corrección Técnica en Tiempo Real</li>
+                    <li class="lista">Flexibilidad en Sesiones de Entrenamiento</li>
+                    <li class="lista">Soporte y Asesoría 24/7</li>
+                    <li class="lista">Recursos educativos (Ebooks de suplementación, entrenamiento, nutrición, recetas y
+                        bienestar integral)</li>
+                    <li class="lista">Plan de Entrenamiento para Viajes</li>
+                    <br>
+                    <li>Descuentos Exclusivos: <br>
+                        10% de descuento en el mes de tu cumpleaños.
+                        <br> 10% de descuento por cada referido que se inscriba.
+                        <br> 10% de descuento por permanencia continua de 3, 6, 9 o 12 meses.
+                    </li>
+
+
+            </div>
+
+            <div class="custom-plan">
+                <h3>Entrenamiento Online (Videollamada)</h3>
+                <p class="custom-plan-subtitle">La misma potencia de manera virtual</p>
+                <p class="custom-plan-price">
+
+                </p>
+                <p class="custom-current-price">COP$ 30.000/1 Sesión</p>
+                <p class="custom-current-price">COP$ 360.000/12 Sesiones</p>
+                <p class="custom-current-price">COP$ 432.000/16 Sesiones <span class="custom-discount">AHORRA 10%</span>
+                </p>
+                <p class="custom-current-price">COP$ 510.000/20 Sesiones <span class="custom-discount">AHORRA 15%</span>
+                </p>
+
+                <a href="https://wa.link/mepwbl"><button class="custom-plan-button">Elegir plan</button></a>
+                <ul class="custom-plan-list">
+                    <li class="lista">Sesión de entrenamiento en vivo</li>
+                    <li class="lista">Plan de Entrenamiento Específico</li>
+                    <li class="lista">Plan Nutricional Específico</li>
+                    <li class="lista">Evaluación Física y Seguimiento</li>
+                    <li class="lista">Entrenamiento en la comodidad del hogar o gimnasio</li>
+                    <li class="lista">Corrección Técnica en Tiempo Real</li>
+                    <li class="lista">Flexibilidad en Sesiones de Entrenamiento</li>
+                    <li class="lista">Soporte y Asesoría 24/7</li>
+                    <li class="lista">Recursos educativos (Ebooks de suplementación, entrenamiento, nutrición, recetas y
+                        bienestar integral)</li>
+                    <li class="lista">Plan de Entrenamiento para Viajes</li>
+                    <li>Descuentos Exclusivos: <br>
+                        10% de descuento en el mes de tu cumpleaños.
+                        <br> 10% de descuento por cada referido que se inscriba.
+                        <br> 10% de descuento por permanencia continua de 3, 6, 9 o 12 meses.
+                    </li>
+                </ul>
+            </div>
+
+           
+        </div>
+    </section>
+
+
+
+    <section class="has-bg-img" id="features">
+        <div class="overlay"></div>
+    
+        <!-- Botón que abre el modal -->
+        <a data-toggle="modal" href="#exampleModalCenter" id="openModal">
+            <i></i>
+        </a>
+    
+        <!-- Modal -->
+        <div class="modal" id="exampleModalCenter">
+            <div class="modal-content">
+                <button class="close-btn" id="closeModal">&times;</button>
+                <iframe id="videoIframe"
+                    src="https://www.youtube.com/embed/X4Wogvmo9fM?enablejsapi=1&controls=1"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+    <section id="e-books" class="custom-plans-section">
+        <h3 class="custom-plans-title">  ¿Buscas material de entreno gratuito?  </h3>
+        <div class="book-container ">
+            <div class="book-custom">
+                <h3>CUERPO 360</h3>
+                <p>Programa de entrenamiento híbrido para hombres y mujeres <br> No se limita a rutinas de ejercicios;
+                    es una experiencia completa de transformación diseñada para enseñarte a entrenar y a comer de manera
+                    inteligente, alcanzar metas de fuerza y dar forma a tu cuerpo según tus deseos. El objetivo es que
+                    obtengas conocimientos sólidos sobre el entrenamiento, comprendas el funcionamiento de tu cuerpo y
+                    adoptes hábitos de vida saludables. Sea cual sea tu nivel (principiante, intermedio o avanzado),
+                    Cuerpo 360 se adapta a ti con sesiones desafiantes y efectivas. <br> Es un programa para todos,
+                    independientemente de tu condición física actual.</p>
+                <button class="custom-plan-button"><a target="_blank"
+                        href="https://pay.hotmart.com/L89930827G?bid=1730217492001">Conseguir E-Book</a></button>
+                <img src="{% static 'imgs/Cuerpo360.webp' %}" class="cuerpo">
+            </div>
+
+            <div class="book-custom ">
+                <h3>BIENESTAR INTEGRAL</h3>
+                <p>GUÍA COMPLETA PARA DESARROLLAR HÁBITOS SALUDABLES. <br> Descubre cómo transformar tu vida a través de
+                    hábitos saludables en esta guía integral. Con enfoques prácticos y respaldados por la ciencia,
+                    aprenderás a cuidar de tu cuerpo, mente y emociones. Desde la nutrición y el ejercicio hasta la
+                    gestión del estrés y la mejora del sueño, este ebook te proporcionará las herramientas necesarias
+                    para alcanzar un bienestar duradero y equilibrado.
+                    <br> Empieza tu viaje hacia una vida más saludable y plena hoy mismo.<br>
+                </p>
+                <button class="custom-plan-button"><a target="_blank"
+                        href="https://drive.google.com/file/d/1KJlKXegzABPUqbZaPlejDAJjB3ELDHkY/view">Conseguir
+                        E-Book</a></button>
+                <img src="{% static 'imgs/Bienestar_Integral.webp' %}" class="cuerpo">
+
+            </div>
+    </section>
+
+    <!-- Section -->
+    <section>
+        <!-- Container -->
+        <div class="container">
+            <!-- Row -->
+            <div class="row justify-content-between align-items-center">
+                <div class="col-md-6">
+                    <div class="img-wrapper">
+                        <div class="after"></div>
+                        <img src="{% static 'imgs/gimnasio-crossfit.webp' %}" class="w-100" alt="About us">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <h3 class="custom-plans-title"> Quieres una asesoría virtual gratuita?  </h3>
+
+                    <p class="custom-text">Reserva una sesión personalizada para resolver tus dudas y recibir
+                        recomendaciones adaptadas a tus objetivos. Aprovecha esta oportunidad para dar el primer paso
+                        hacia tus metas con la guía de un experto.</p>
+                    <p class="text-muted ">No dejes pasar esta oportunidad. ¡Agenda ahora y obtén las respuestas que
+                        necesitas!</p>
+
+                    <a href="https://calendly.com/julianrpotrainer/resolviendo-dudas-de-entrenamiento-y-nutricion"
+                        target="_blank"><button class="custom-plan-button">Quiero mi asesoría gratuita</button></a>
+                </div>
+            </div><!-- End of Row -->
+        </div><!-- End of Container-->
+    </section><!-- End of Section -->
+
+    <!-- Testmonial Section -->
+    <section class="text-center pt-5" id="testimonios">
+        <div class="container">
+            <h3 class="custom-plans-title"> Testimonios  </h3>
+            <div class="row">
+                <p class="custom-text">
+                    Conoce la experiencia de quienes ya confiaron en mí. Cada uno de estos testimonios refleja cómo mis
+                    asesorías y planes personalizados han ayudado a cumplir objetivos específicos, mejorar el bienestar
+                    y transformar hábitos. Escucha a mis clientes, comparten sus experiencias y cómo mis estrategias y
+                    planes personalizados han impactado positivamente en sus vidas. Escuchar sus historias te dará una
+                    idea clara de lo que puedes esperar al trabajar conmigo.
+                </p>
+                <div class="col-sm-10 col-md-4 m-auto">
+                    <div class="testimonial-wrapper">
+                        <h6 class="title mb-3">Andres Yepes</h6>
+                        <iframe id="video1" class="youtube-video"
+                            src="https://www.youtube.com/embed/HpXh9zevcy0?enablejsapi=1&rel=0" title="YouTube Short"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-md-4 m-auto">
+                    <div class="testimonial-wrapper">
+                        <h6 class="title mb-3">Juan David Ocampo</h6>
+                        <iframe id="video2" class="youtube-video"
+                            src="https://www.youtube.com/embed/s2tSaSlsyRA?enablejsapi=1&rel=0" title="YouTube Short"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-md-4 m-auto">
+                    <div class="testimonial-wrapper">
+                        <h6 class="title mb-3">Juan Roldan</h6>
+                        <iframe id="video3" class="youtube-video"
+                            src="https://www.youtube.com/embed/h1eCB9sSVek?enablejsapi=1&rel=0" title="YouTube Short"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-md-4 m-auto">
+                    <div class="testimonial-wrapper">
+                        <h6 class="title mb-3">Verónica García</h6>
+                        <iframe id="video4" class="youtube-video"
+                            src="https://www.youtube.com/embed/T1GPhrIR6-0?enablejsapi=1&rel=0" title="YouTube Short"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-md-4 m-auto">
+                    <div class="testimonial-wrapper">
+                        <h6 class="title mb-3">Andrea Echavarria</h6>
+                        <iframe id="video5" class="youtube-video"
+                            src="https://www.youtube.com/embed/NT-smXM8DCc?enablejsapi=1&rel=0" title="YouTube Short"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+
+                <div class="carrusel">
+                    <div class="carrusel-inner">
+                        <div class="carrusel-item"><img src="{% static 'imgs/Avatar.webp' %}" alt="Imagen 1"></div>
+                        <div class="carrusel-item"><img src="{% static 'imgs/Avatar.webp' %}" alt="Imagen 2"></div>
+                        <div class="carrusel-item"><img src="{% static 'imgs/Avatar.webp' %}" alt="Imagen 3"></div>
+                        <div class="carrusel-item"><img src="{% static 'imgs/Avatar.webp' %}" alt="Imagen 4"></div>
+                        <div class="carrusel-item"><img src="{% static 'imgs/Avatar.webp' %}" alt="Imagen 5"></div>
+                        <div class="carrusel-item"><img src="{% static 'imgs/Avatar.webp' %}" alt="Imagen 6"></div>
+                        <div class="carrusel-item"><img src="{% static 'imgs/Avatar.webp' %}" alt="Imagen 7"></div>
+                        <div class="carrusel-item"><img src="{% static 'imgs/Avatar.webp' %}" alt="Imagen 8"></div>
+                        <div class="carrusel-item"><img src="{% static 'imgs/Avatar.webp' %}" alt="Imagen 9"></div>
+                        <div class="carrusel-item"><img src="{% static 'imgs/Avatar.webp' %}" alt="Imagen 10"></div>
+                    </div>
+                </div>
+
+
+
+    </section>
+
+    <!-- Section -->
+    <section class="has-bg-img text-center text-light height-auto">
+        <h2 class="display-4">HABLEMOS DE NEGOCIOS</h2>
+    </section><!-- End of Section -->
+
+
+    <!-- Contact Section -->
+    <section id="contacto" class="text-center">
+        <!-- container -->
+        <div class="container">
+            <h3 class="custom-plans-title">  CONTACTAME  </h3>
+            <p class="mb-5 p-white">¿Tienes alguna pregunta o deseas obtener más información sobre mis servicios de
+                asesoría? Estoy aquí para ayudarte. Tu bienestar es mi prioridad y quiero asegurarme de que tengas toda
+                la información que necesitas para dar el siguiente paso en tu viaje hacia una vida más saludable y
+                activa.
+                <br>
+            </p>
+
+            <!-- Contact form -->
+            <!-- Formulario de contacto -->
+            <form id="contactForm" class="contact-form col-md-11 col-lg-9 mx-auto">
+                <div class="form-row">
+                    <div class="col form-group">
+                        <input name="nombre" type="text" class="form-control" placeholder="Nombre" required>
+                    </div>
+                    <div class="col form-group">
+                        <input name="correo" type="email" class="form-control" placeholder="Email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea name="mensaje" cols="30" rows="5" class="form-control" placeholder="Tu mensaje"
+                        required></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-block" value="Enviar mensaje">
+                </div>
+            </form>
+
+
+
+    </section><!-- End of Contact Section -->
+
+
+
+
+
+    <!-- Section -->
+    <section class="pb-0">
+        <!-- Container -->
+        <div class="container">
+            <!-- Pre footer -->
+            <div class="pre-footer">
+                <ul class="list">
+                    <li class="list-head">
+                        <h6 class="font-weight-bold">ACERCA DE MI</h6>
+                    </li>
+                    <li class="list-body">
+                        <p class="p-white">Soy un entrenador personalizado con más de 7 años de experiencia,
+                            especializado en recomposición corporal, nutrición deportiva y entrenamiento para mujeres.
+                            Trabajo de forma presencial y online, y he ayudado a transformar la vida de más de 1000
+                            personas en varios países.</p>
+                    
+                    </li>
+                </ul>
+
+                <ul class="list">
+                    <li class="list-head">
+                        <h6 class="font-weight-bold">DATOS DE CONTACTO</h6>
+                    </li>
+                    <li class="list-body">
+                        <p class="p-white">Visita todas mis redes sociales para aprender mas sobre tus entrenamientos
+                        </p>
+
+                        <p class="mail"><img src="{% static 'imgs/mail.webp'%}" class="red-mail">julianrpo03@gmail.com</p>
+                        <div class="social-links-footer">
+
+                            <a href="https://www.instagram.com/julianrpo_trainer/" class="link" target="_blank" >
+                                <img src=" {% static 'imgs/instagram.webp' %}" alt="Instagram" class="instagram red">
+                            </a>
+                            <a href="https://www.tiktok.com/@julianrpo_trainer" class="link" target="_blank" >
+                                <img src=" {% static 'imgs/tiktok.webp' %} "alt="TikTok" class="tiktok red">
+                            </a>
+                            <a href="https://www.youtube.com/@julianrpo_trainer" class="link" target="_blank" >
+                                <img src=" {% static 'imgs/youtube.webp' %}" alt="YouTube" class="youtube red">
+                            </a>
+                            <a href="https://wa.link/mepwbl" class="link" target="_blank" >
+                                <img src=" {% static 'imgs/whatsapp.webp' %}" alt="WhatsApp" class="whatsapp red">
+                            </a>
+                            <a href="https://www.facebook.com/people/Julian-Restrepo-Trainer/61560546806719/"
+                                class="link" target="_blank" >
+                                <img src=" {% static 'imgs/facebook.webp' %}" alt="Facebook" class="facebook red">
+                            </a>
+                        </div>
+
+                    </li>
+                </ul>
+            </div><!-- End of Pre footer -->
+
+            <!-- foooter -->
+            <footer class="footer">
+                <p class="p-white">Copyright
+                    <script>document.write(new Date().getFullYear())</script> &copy; 
+                </p>
+            </footer><!-- End of Footer-->
+
+        </div><!--End of Container -->
+    </section><!-- End of Section -->
+    {% endblock %}
+
+
+<!-- Cargar tu archivo de JavaScript personalizado (creative-design.js) -->
+
+<!-- Archivos de la carpeta bootstrap -->
+
+
+<script src="{% static 'js/scripts.js' %}"></script>
+
+</body>
+</html>

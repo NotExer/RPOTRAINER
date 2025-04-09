@@ -1,0 +1,60 @@
+{% extends 'main/index.html' %}
+
+{% block styles %}
+{{ block.super }}
+{% endblock %}
+
+{% block navbar %}
+{{ block.super }}
+{% endblock %}
+
+{% block content %}
+<section class="space container-fluid mt-4">
+    <h3 class="custom-plans-title text-center text-light">Mis clientes</h3> 
+
+    <!-- Botón para crear un cliente nuevo -->
+    <div class="text-center mb-3">
+        <a href="{% url 'crear_cliente' %}" class="btn btn-primary">Crear Cliente Nuevo</a>
+    </div>
+
+    <!-- Tabla responsiva con mejor estilo -->
+    <div class="table-responsive">
+        <table class="table table-bordered text-light w-100">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Sexo</th>
+                    <th>Edad</th>
+                    <th>Objetivo físico</th>
+                    <th>Patologías</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in cliente %}
+                <tr>
+                    <td data-label="ID:">{{ cliente.ClienteID }}</td>
+                    <td data-label="Nombre:">{{ cliente.Nombre }}</td>
+                    <td data-label="Sexo:">{{ cliente.Genero }}</td>
+                    <td data-label="Edad:">{{ cliente.Edad }}</td>
+                    <td data-label="Objetivo físico:">{{ cliente.Objetivo }}</td>
+                    <td data-label="Patologías:">{{ cliente.Patologias }}</td>
+                    <td data-label="Acciones:">
+                        
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center">No hay clientes registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% block scripts %}
+{{ block.super }}
+{% endblock %}
+{% endblock %}
