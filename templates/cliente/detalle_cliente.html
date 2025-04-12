@@ -1,0 +1,107 @@
+<div class="modal" id="modal">
+  <div class="modal-content-detalle">
+   <div class="modal_header text-white">Detalles de {{ object.Nombre }}</div>
+    <hr class="divider">
+ 
+    <form method="post" action="{% url 'eliminar_cliente' object.ClienteID %}" class="form-reset">
+    {% csrf_token %}
+    <div class="response-group">
+        <p class="text-response" data-label="ID de cliente:" data-value="{{ object.ClienteID }}"></p>
+        <p class="text-response" data-label="Nombre:" data-value="{{ object.Nombre }}"></p>
+        <p class="text-response" data-label="Fecha de nacimiento:" data-value="{{ object.Nacimiento }}"></p>
+        <p class="text-response" data-label="Edad:" data-value="{{ object.Edad }}"></p>
+        <p class="text-response" data-label="Genero:" data-value="{{ object.Genero }}"></p>
+        <p class="text-response" data-label="Correo:" data-value="{{ object.Correo }}"></p>
+        <p class="text-response" data-label="Telefono:" data-value="{{ object.Telefono }}"></p>
+        <p class="text-response" data-label="Direccion:" data-value="{{ object.Direccion }}"></p>
+        <p class="text-response" data-label="Divulgacion:" data-value="{{ object.Divulgacion }}"></p>
+      </div>
+      <hr class="divider">
+      <div class="response-group">
+        <p class="text-response" data-label="Altura:" data-value="{{ object.Altura }}"></p>
+        <p class="text-response" data-label="Enfermedad:" data-value="{{ object.Enfermedad }}"></p>
+        <p class="text-response" data-label="Informacion de enfermedad:" data-value="{{ object.Info_enfermedad }}"></p>
+        <p class="text-response" data-label="Cirugia:" data-value="{{ object.Cirugia }}"></p>
+        <p class="text-response" data-label="Informacion de cirugias:" data-value="{{ object.Info_cirugia }}"></p>
+        <p class="text-response" data-label="Siente dolores:" data-value="{{ object.Dolor }}"></p>
+        <p class="text-response" data-label="Informacion de dolor:" data-value="{{ object.Info_dolor }}"></p>
+        <p class="text-response" data-label="Toma medicamento:" data-value="{{ object.Medicamento }}"></p>
+        <p class="text-response" data-label="Informacion de medicamentos:" data-value="{{ object.Info_medicamento }}"></p>
+        <p class="text-response" data-label="Restricciones:" data-value="{{ object.Restricciones }}"></p>
+        <p class="text-response" data-label="Informacion de restricciones:" data-value="{{ object.Info_restricciones }}"></p>
+        <p class="text-response" data-label="Horas de sueño:" data-value="{{ object.Descanso }}"></p>
+        <p class="text-response" data-label="Fuma:" data-value="{{ object.Fumas }}"></p>
+        <p class="text-response" data-label="Consume alcohol:" data-value="{{ object.Alcohol }}"></p>
+        <p class="text-response" data-label="Frecuencia de chequeos medicos:" data-value="{{ object.Chequeos }}"></p>
+      </div>
+      <hr class="divider">
+      <div class="response-group">
+        <p class="text-response" data-label="Descripcion de Rutina:" data-value="{{ object.Rutina }}"></p>
+        <p class="text-response" data-label="Alimentacion diaria:" data-value="{{ object.Alimentacion }}"></p>
+        <p class="text-response" data-label="Deseo de alimentacion:" data-value="{{ object.Deseo_alimentacion }}"></p>
+        <p class="text-response" data-label="Hora de desayuno:" data-value="{{ object.Hora_desayuno }}"></p>
+        <p class="text-response" data-label="Hora de media mañana:" data-value="{{ object.Hora_media_manana }}"></p>
+        <p class="text-response" data-label="Hora de almuerzo:" data-value="{{ object.Hora_almuerzo }}"></p>
+        <p class="text-response" data-label="Hora de media tarde:" data-value="{{ object.Hora_media_tarde }}"></p>
+        <p class="text-response" data-label="Hora de cena:" data-value="{{ object.Hora_cena }}"></p>
+        <p class="text-response" data-label="Ingesta de agua:" data-value="{{ object.Agua }}"></p>
+        <p class="text-response" data-label="Practica de deporte:" data-value="{{ object.Deporte }}"></p>
+        <p class="text-response" data-label="Informacion de practica de deporte:" data-value="{{ object.Info_deporte }}"></p>
+        <p class="text-response" data-label="Frecuencia semanal de deporte:" data-value="{{ object.Semana_deporte }}"></p>
+      </div>
+      <hr class="divider">
+      <div class="response-group">
+        <p class="text-response" data-label="Historial de Nutricion:" data-value="{{ object.Nutricion }}"></p>
+        <p class="text-response" data-label="Informacion de historial de nutricion:" data-value="{{ object.Info_nutricion }}"></p>
+        <p class="text-response" data-label="Alergias alimenticias:" data-value="{{ object.Alergia }}"></p>
+        <p class="text-response" data-label="Informacion de alergia:" data-value="{{ object.Info_alergia }}"></p>
+        <p class="text-response" data-label="Historial de dieta:" data-value="{{ object.Dieta }}"></p>
+        <p class="text-response" data-label="Informacion de historial de diata:" data-value="{{ object.Info_dieta }}"></p>
+        <p class="text-response" data-label="Macronutrientes favoritos:" data-value="{{ object.Macronutrientes }}"></p>
+        <p class="text-response" data-label="Frutas y verduras favoritas:" data-value="{{ object.Frutas_verduras }}"></p>
+        <p class="text-response" data-label="Algun alimento a evitar:" data-value="{{ object.Evitaciones }}"></p>
+        <p class="text-response" data-label="Alimentos a evitar:" data-value="{{ object.Info_Evitaciones }}"></p>
+        <p class="text-response" data-label="Desea suplementacion:" data-value="{{ object.Suplementacion }}"></p>
+      </div>
+      <hr class="divider">
+      <div class="response-group">
+        <p class="text-response" data-label="Nivel de entrenamiento:" data-value="{{ object.Entrenamientos }}"></p>
+        <p class="text-response" data-label="Informacion de entrenamientos:" data-value="{{ object.Info_entrenamientos }}"></p>
+        <p class="text-response" data-label="Nivel de experiencia:" data-value="{{ object.Nivel }}"></p>
+        <p class="text-response" data-label="Frecuencia de entrenamientos:" data-value="{{ object.Frecuencia }}"></p>
+        <p class="text-response" data-label="Tiempo por sesion:" data-value="{{ object.Tiempo }}"></p>
+        <p class="text-response" data-label="Hora de entrenamiento:" data-value="{{ object.Hora }}"></p>
+        <p class="text-response" data-label="Objetivo principal:" data-value="{{ object.Objetivo }}"></p>
+        <p class="text-response" data-label="Cuenta con experiencia:" data-value="{{ object.Experiencia }}"></p>
+        <p class="text-response" data-label="Dias de entrenamiento:" data-value="{{ object.Info_frecuencia }}"></p>
+        <p class="text-response" data-label="Entorno de entrenamiento:" data-value="{{ object.Entorno }}"></p>
+        <p class="text-response" data-label="Cuenta con Equipamiento:" data-value="{{ object.Equipamiento }}"></p>
+        <p class="text-response" data-label="Equipamiento:" data-value="{{ object.Info_equipamiento }}"></p>
+        <p class="text-response" data-label="Disgusto de entrenamiento:" data-value="{{ object.Disgusto }}"></p>
+      </div>
+      <hr class="divider">
+      <div class="response-group">
+        <p class="text-response" data-label="Servicio seleccionado:" data-value="{{ object.Servicio }}"></p>
+        <p class="text-response" data-label="Duracion de la asesoria:" data-value="{{ object.Duracion_asesoria }}"></p>
+        <p class="text-response" data-label="Numero de sesiones:" data-value="{{ object.Sesiones }}"></p>
+        <p class="text-response" data-label="Comentarios y preferencias:" data-value="{{ object.Preferencias }}"></p>
+      </div>
+      <hr class="divider">
+      <div class="response-group">
+        <p class="text-response" data-label="Contenido en redes:" data-value="{{ object.Contenido }}"></p>
+        <p class="text-response" data-label="Perfiles en redes:" data-value="{{ object.Redes }}"></p>
+      </div>
+      <hr class="divider">
+      <div class="response-group">
+        <p class="text-response" data-label="Fecha de inicio:" data-value="{{ object.Fecha_inicio }}"></p>
+        <p class="text-response" data-label="Fecha de finalizacion:" data-value="{{ object.fecha_fin }}"></p>
+        <p class="text-response" data-label="Fecha de pago:" data-value="{{ object.fecha_pago }}"></p>
+      </div>
+      
+
+      <button type="button" class="crear_button" onclick="cerrar_modal()">Cerrar</button>
+    </div>
+    </form>
+  </div>
+</div>
+ 

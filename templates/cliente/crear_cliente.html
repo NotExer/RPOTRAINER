@@ -1,4 +1,3 @@
-<!-- cliente/crear_cliente.html -->
 {% extends 'main/index.html' %}
 
 {% block styles %}
@@ -13,24 +12,52 @@
 <section class="space">
     <h3 class="custom-plans-title"><b>{{ step_title }}</b></h3> <!-- Título del paso actual -->
     <form method="post" class="client-form">
-        {% csrf_token %}
-        <div class="form-container">
-            {% for field in form %}
-            <div class="form-group {% if field.name|slice:":5" == "Info_" %}info-extra{% endif %}" id="group_{{ field.name }}">
-              {{ field.label_tag }}
-              {{ field }}
-              {{ field.errors }}
-            </div>
+      {% csrf_token %}
+    
+      <div id="form-steps-container">
+        {% for step in form_steps %}
+          <div class="form-step">
+            <h3>{{ step.title }}</h3>
+            {% for field in step.fields %}
+            {% with field_name=field.name %}
+              {% if field_name in "Info_enfermedad,Info_cirugia,Info_dolor,Info_medicamento,Info_restricciones,Info_deporte,Info_nutricion,Info_alergia,Info_dieta,Info_evitaciones,Info_entrenamientos,Info_equipamiento" %}
+                <div id="group_{{ field_name }}" class="form-group">
+                  {% if field.errors %}
+                  <div id="selected-items" class="mt-2"></div>
+
+                    <div class="error">{{ field.errors }}</div>
+                  {% endif %}
+                  {{ field.label_tag }}
+                  {{ field }}
+                </div>
+              {% else %}
+              <div class="form-group">
+                {% if field.errors %}
+                  <div class="error">{{ field.errors }}</div>
+                {% endif %}
+                {{ field.label_tag }}
+                
+                {% if field.name == "Macronutrientes" %}
+                  {{ field }}
+                  <div id="selected-items" class="mt-2"></div>
+                  <input type="hidden" name="macros_seleccionados" id="macros-seleccionados">
+                {% else %}
+                  {{ field }}
+                {% endif %}
+              </div>              
+              {% endif %}
+            {% endwith %}
           {% endfor %}
           
-          
-
-        </div>
-        <button type="submit" class="btn-enviar">Finalizar</button>
+          </div>
+        {% endfor %}
+      </div>
+    
+      <div class="step-buttons">
+        <button type="button" class="form_button" id="prevBtn" onclick="nextPrev(-1)" style="display: none;">Anterior</button>
+        <button type="button" class="form_button" id="nextBtn" onclick="nextPrev(1)">Siguiente</button>
+        <button type="submit" id="submitBtn">Enviar</button>
+      </div>
     </form>
-    
-    
-
-    
 </section>
 {% endblock %}

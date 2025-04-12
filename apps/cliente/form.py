@@ -54,7 +54,7 @@ class Clienteform(forms.ModelForm):
     'Macronutrientes',
     'Frutas_verduras',
     'Evitaciones',
-    'Info_Evitaciones',
+    'Info_evitaciones',
     'Suplementacion',
     #====
     'Entrenamientos',
@@ -130,7 +130,7 @@ class Clienteform(forms.ModelForm):
     'Macronutrientes':'Selecciona tus macronutrientes preferidos (Carbohidratos, proteínas, grasas saludables)',
     'Frutas_verduras':'Describe tus futas y verduras preferidas',
     'Evitaciones':'¿Hay algún alimento que prefieres evitar?',
-    'Info_Evitaciones':'Que alimentos prefieres evitar',
+    'Info_evitaciones':'Que alimentos prefieres evitar',
     'Suplementacion':'¿Estás interesado en consumir suplementación?',
     'Entrenamientos':'¿Has seguido un plan de entrenamiento previamente?',
     'Info_entrenamientos':'¿cómo te sentiste con ese plan?',
@@ -158,16 +158,15 @@ class Clienteform(forms.ModelForm):
         
         widgets = {
         'Nombre': forms.TextInput(attrs={'class': 'input-user'}),
-  'Nacimiento': forms.DateInput(attrs={'class': 'custom-date datepicker','type': 'text','readonly': 'readonly','placeholder': 'Selecciona una fecha'}),
-    'Edad': forms.NumberInput(attrs={'class': 'input-user','min': '0','oninput': "this.value = this.value.replace(/[^0-9]/g, '');",'step': '1','inputmode': 'numeric' }),
-    'Genero': forms.Select(attrs={'class': 'form-select'}),
-    'Correo': forms.EmailInput(attrs={'class': ' input-user'}),
-    'Telefono': forms.NumberInput(attrs={'class': 'input-user','min': '0','oninput': "this.value = this.value.replace(/[^0-9]/g, '');",'step': '1','inputmode': 'numeric' }),
+        'Nacimiento': forms.DateInput(attrs={'class': 'custom-date datepicker','type': 'text','readonly': 'readonly','placeholder': 'Selecciona una fecha'}),
+        'Edad': forms.NumberInput(attrs={'class': 'input-user','min': '0','oninput': "this.value = this.value.replace(/[^0-9]/g, '');",'step': '1','inputmode': 'numeric' }),
+        'Genero': forms.Select(attrs={'class': 'form-select'}),
+        'Correo': forms.EmailInput(attrs={'class': ' input-user'}),
+        'Telefono': forms.NumberInput(attrs={'class': 'input-user','min': '0','oninput': "this.value = this.value.replace(/[^0-9]/g, '');",'step': '1','inputmode': 'numeric' }),
 
 
     'Direccion': forms.Textarea(attrs={'class': ' input-user'}),
     'Divulgacion': forms.Select(attrs={'class': 'form-select'}),
-
     'Altura': forms.NumberInput(attrs={'class': 'input-user'}),
     'Peso': forms.NumberInput(attrs={'class': 'input-user'}),  # Cambié a NumberInput ya que debe ser un número
     'Enfermedad': forms.RadioSelect(choices=[(True, "Sí"), (False, "No")], attrs={'class': 'radio-custom'}),
@@ -205,24 +204,24 @@ class Clienteform(forms.ModelForm):
     'Info_alergia': forms.TextInput(attrs={'class': 'input-user'}),
     'Dieta': forms.RadioSelect(choices=[(True, "Sí"), (False, "No")],attrs={'class': 'radio-custom'}),
     'Info_dieta': forms.TextInput(attrs={'class': 'input-user'}),
-    'Macronutrientes': forms.Select(attrs={'class': 'input-user'}),
+    'Macronutrientes': forms.Select(attrs={'class': 'input-user', 'id': 'macronutrientes-select'}),
     'Frutas_verduras': forms.TextInput(attrs={'class': 'input-user'}),
     'Evitaciones': forms.RadioSelect(choices=[(True, "Sí"), (False, "No")],attrs={'class': 'radio-custom'}),
-    'Info_Evitaciones': forms.TextInput(attrs={'class': 'input-user'}),
+    'Info_evitaciones': forms.TextInput(attrs={'class': 'input-user'}),
     'Suplementacion': forms.Select(attrs={'class': ' input-user'}),
 #======================================================================================================================================================================================
     'Entrenamientos': forms.RadioSelect(choices=[(True, "Sí"), (False, "No")],attrs={'class': 'radio-custom'}),
     'Info_entrenamientos': forms.TextInput(attrs={'class': ' input-user'}),
     'Nivel': forms.Select(attrs={'class': ' input-user'}),
     'Frecuencia': forms.Select(attrs={'class': ' input-user'}),
-    'Info_frecuencia': forms.TextInput(attrs={'class': ' input-user'}),
+    'Info_frecuencia': forms.Select(attrs={'class': 'input-user'}),
     'Tiempo': forms.Select(attrs={'class': ' input-user'}),
     'Hora': forms.Select(attrs={'class': ' input-user'}),
     'Objetivo': forms.Select(attrs={'class': ' input-user'}),
     'Experiencia': forms.RadioSelect(choices=[(True, "Sí"), (False, "No")],attrs={'class': 'radio-custom'}),
     'Entorno': forms.Select(attrs={'class': ' input-user'}),
     'Equipamiento': forms.RadioSelect(choices=[(True, "Sí"), (False, "No")],attrs={'class': 'radio-custom'}),
-    'Info_equipamiento': forms.TextInput(attrs={'class': ' input-user'}),
+    'Info_equipamiento': forms.Select(attrs={'class': ' input-user'}),
     'Disgusto': forms.TextInput(attrs={'class': ' input-user'}),
 #======================================================================================================================================================================================
     'Servicio': forms.Select(attrs={'class': ' input-user'}),
@@ -233,9 +232,7 @@ class Clienteform(forms.ModelForm):
     'Contenido': forms.Textarea(attrs={'class': ' input-user'}),
     'Redes': forms.Textarea(attrs={'class': ' input-user'}),
 #======================================================================================================================================================================================
-    'Fecha_inicio': forms.DateInput(attrs={'class': 'custom-date', 'type': 'date', 'id': 'datepicker_inicio'}),
-    'fecha_fin': forms.DateInput(attrs={'class': 'custom-date', 'type': 'date', 'id': 'datepicker_fin'}),
-    'fecha_pago': forms.DateInput(attrs={'class': 'custom-date', 'type': 'date', 'id': 'datepicker_pago'}),
+    'Fecha_inicio': forms.DateInput(attrs={'class': 'custom-date datepicker','type': 'text','readonly': 'readonly','placeholder': 'Selecciona una fecha'}),
+    'fecha_fin': forms.DateInput(attrs={'class': 'custom-date datepicker','type': 'text','readonly': 'readonly','placeholder': 'Selecciona una fecha'}),
+    'fecha_pago': forms.DateInput(attrs={'class': 'custom-date datepicker','type': 'text','readonly': 'readonly','placeholder': 'Selecciona una fecha'}),
     }
-
-

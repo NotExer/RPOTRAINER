@@ -1,3 +1,4 @@
+//scroll oscuro cuando baja
 document.addEventListener("DOMContentLoaded", () => {
   const navbar = document.getElementById("scrollspy");
 
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
+//carrusel de imagenes
 document.addEventListener("DOMContentLoaded", function () {
   // Aseguramos que el DOM esté completamente cargado antes de acceder a los elementos
   const carruselInner = document.querySelector(".carrusel-inner");
@@ -55,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-
+//barra de navegacion desplegable
 document.addEventListener("DOMContentLoaded", function () {
   const navLinks = document.querySelectorAll('.navbar-nav a'); // cambiamos selector a los <a> reales
   const menuButton = document.getElementById("menu-button");
@@ -97,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
+//abre modal de video
 document.addEventListener("DOMContentLoaded", function () {
     const openModalBtn = document.getElementById("openModal");
     const closeModalBtn = document.getElementById("closeModal");
@@ -128,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
+//aparece la alerta y se desvanece
 document.addEventListener("DOMContentLoaded", () => {
   const alerts = document.querySelectorAll(".alert");
 
@@ -141,8 +142,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
+//oculta y muestra campos segun seleccion de radio
 document.addEventListener('DOMContentLoaded', function () {
+  // Quitar el atributo 'required' de campos de hora
+  const timeFieldIds = [
+    'id_Hora_desayuno',
+    'id_Hora_media_manana',
+    'id_Hora_almuerzo',
+    'id_Hora_media_tarde',
+    'id_Hora_cena'
+  ];
+
+  // Eliminar 'required' de los campos de hora
+  timeFieldIds.forEach(id => {
+    const input = document.getElementById(id);
+    if (input) {
+      input.removeAttribute('required');
+    }
+  });
+
   const toggleMap = {
     'id_Enfermedad': 'group_Info_enfermedad',
     'id_Cirugia': 'group_Info_cirugia',
@@ -158,46 +176,141 @@ document.addEventListener('DOMContentLoaded', function () {
     'id_Equipamiento': 'group_Info_equipamiento',
   };
 
+  // Iterar sobre las opciones para mostrar/ocultar grupos según las respuestas
   for (const triggerId in toggleMap) {
     const fieldName = triggerId.replace('id_', '');
     const radios = document.getElementsByName(fieldName);
     const targetGroup = document.getElementById(toggleMap[triggerId]);
 
-    let anyChecked = false;
+    if (!targetGroup || radios.length === 0) continue;
 
-    radios.forEach(radio => {
-      // Escuchamos cambios
-      radio.addEventListener('change', () => {
-        if (radio.value === "True" && radio.checked) {
-          targetGroup.style.display = 'block';
-        } else if (radio.value === "False" && radio.checked) {
-          targetGroup.style.display = 'none';
-        }
-      });
+    const inputs = targetGroup.querySelectorAll("input, select, textarea");
 
-      // Al cargar, detectamos si algún radio está marcado
-      if (radio.checked) {
-        anyChecked = true;
-        if (radio.value === "True") {
-          targetGroup.style.display = 'block';
-        } else {
-          targetGroup.style.display = 'none';
-        }
-      }
+    // Guardar el estado de los campos 'required'
+    const requiredMap = new Map();
+    inputs.forEach(input => {
+      requiredMap.set(input, input.hasAttribute("required"));
     });
 
-    // Si no se ha seleccionado nada, ocultamos el grupo
-    if (!anyChecked && targetGroup) {
-      targetGroup.style.display = 'none';
-    }
+    // Función para actualizar la visibilidad y los campos requeridos
+    const updateVisibility = () => {
+      const selected = Array.from(radios).find(r => r.checked);
+      if (!selected) {
+        targetGroup.style.display = 'none';
+        disableFields(targetGroup, true);
+        setRequiredFields(false);
+        return;
+      }
+
+      if (selected.value === "True") {
+        targetGroup.style.display = 'block';
+        disableFields(targetGroup, false);
+        setRequiredFields(true);
+      } else {
+        targetGroup.style.display = 'none';
+        disableFields(targetGroup, true);
+        setRequiredFields(false);
+      }
+    };
+
+    // Excluir campos de hora de la validación de required
+    const timeFields = [
+      'Hora_desayuno',
+      'Hora_media_manana',
+      'Hora_almuerzo',
+      'Hora_media_tarde',
+      'Hora_cena'
+    ];
+
+    // Función para ajustar el 'required' según las respuestas
+    const setRequiredFields = (shouldBeRequired) => {
+      inputs.forEach(input => {
+        const originallyRequired = requiredMap.get(input);
+        const fieldName = input.name || input.id;
+
+        if (timeFields.includes(fieldName)) {
+          return; // No modificar los campos de hora
+        }
+
+        if (originallyRequired) {
+          if (shouldBeRequired) {
+            input.setAttribute("required", "required");
+          } else {
+            input.removeAttribute("required");
+          }
+        }
+      });
+    };
+
+    // Actualizar visibilidad y requerimientos al cambiar radio buttons
+    radios.forEach(radio => {
+      radio.addEventListener('change', updateVisibility);
+    });
+
+    // Iniciar la visibilidad con el estado inicial
+    updateVisibility();
   }
+
+  // Función para habilitar o deshabilitar campos
+  function disableFields(container, shouldDisable) {
+    const inputs = container.querySelectorAll("input, select, textarea");
+    inputs.forEach(input => {
+      input.disabled = shouldDisable;
+    });
+  }
+
+  // Validación de formulario y avance a la siguiente sección
+  const nextBtn = document.getElementById("nextBtn");
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function (e) {
+      const currentStep = document.querySelector(".form-step:not([style*='display: none'])");
+      if (!currentStep) return;
+
+      const inputs = currentStep.querySelectorAll("input, select, textarea");
+      let valid = true;
+
+      // Validar los campos de la sección actual
+      for (let input of inputs) {
+        const group = input.closest('.form-group');
+
+        // Saltar si está oculto
+        if (!input.offsetParent) continue;
+
+        // Saltar los grupos que empiezan con 'group_Info_'
+        if (group && group.id && group.id.startsWith('group_Info_')) continue;
+
+        // Validar radios y checkboxes requeridos
+        if ((input.type === 'radio' || input.type === 'checkbox') && input.required) {
+          const groupInputs = currentStep.querySelectorAll(`input[name="${input.name}"]`);
+          const oneChecked = Array.from(groupInputs).some(i => i.checked);
+          if (!oneChecked) {
+            valid = false;
+            break;
+          }
+        }
+
+        // Validar campos normales
+        if (input.required && input.value.trim() === '') {
+          valid = false;
+          break;
+        }
+      }
+
+      // Si el formulario no es válido, no avanzamos
+      if (!valid) {
+        // Los errores ya se están mostrando en tu template
+        return;
+      }
+
+      // Si todo está correcto, avanza
+      nextPrev(1);
+    });
+  }
+
 });
 
 
-
-
-
-
+//calendario personalizado
 document.addEventListener('DOMContentLoaded', () => {
   const dateInputs = document.querySelectorAll('.datepicker');
 
@@ -336,4 +449,346 @@ calendar.appendChild(dayHeader);
   }
 });
 
+
+//abre modal de formulario
+document.addEventListener('DOMContentLoaded', function () {
+  // Abre el modal
+  window.abrir_modal = function (url) {
+    fetch(url)
+      .then(response => {
+        if (!response.ok) throw new Error('Error al cargar el modal');
+        return response.text();
+      })
+      .then(html => {
+        const modalContainer = document.getElementById("modal-container");
+        modalContainer.innerHTML = html;
+
+        const modal = document.getElementById("modal");
+        if (modal) {
+          modal.classList.add("show");
+          modal.style.display = "flex";
+          document.body.style.overflow = "hidden";
+
+          // Cierra al hacer clic fuera del modal
+          modal.addEventListener("click", function (e) {
+            if (e.target === modal) {
+              cerrar_modal();
+            }
+          });
+
+          // Cierra con botón interno
+          const closeBtn = modal.querySelector(".close-btn");
+          if (closeBtn) {
+            closeBtn.addEventListener("click", cerrar_modal);
+          }
+        }
+      })
+      .catch(error => console.error(error));
+
+    return false;
+  };
+
+  // Cierra el modal
+  window.cerrar_modal = function () {
+    const modal = document.getElementById("modal");
+    if (modal) {
+      modal.classList.remove("show");
+      modal.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  };
+});
+
+//cambio de pasos en formulario
+document.addEventListener("DOMContentLoaded", function () {
+  const steps = document.querySelectorAll(".form-step");
+  let currentStep = 0;
+
+  function showStep(index) {
+      steps.forEach((step, i) => {
+          step.style.display = i === index ? "block" : "none";
+      });
+  }
+
+  document.querySelectorAll(".next-step").forEach(button => {
+      button.addEventListener("click", () => {
+          if (currentStep < steps.length - 1) {
+              currentStep++;
+              showStep(currentStep);
+          }
+      });
+  });
+
+  document.querySelectorAll(".prev-step").forEach(button => {
+      button.addEventListener("click", () => {
+          if (currentStep > 0) {
+              currentStep--;
+              showStep(currentStep);
+          }
+      });
+  });
+
+  showStep(currentStep);
+});
+
+
+//validacion de formulario de varios pasos
+document.addEventListener("DOMContentLoaded", () => {
+  let currentStep = 0;
+  const steps = document.querySelectorAll(".form-step");
+
+  function showStep(n) {
+    steps.forEach((step, index) => {
+      step.style.display = index === n ? "block" : "none";
+    });
+
+    document.getElementById("prevBtn").style.display = n === 0 ? "none" : "inline-block";
+    document.getElementById("nextBtn").style.display = n === steps.length - 1 ? "none" : "inline-block";
+    document.getElementById("submitBtn").style.display = n === steps.length - 1 ? "inline-block" : "none";
+  }
+
+  let isFirstValidation = true;
+  
+  const optionalFields = [
+    "Hora_desayuno",
+    "Hora_media_manana",
+    "Hora_almuerzo",
+    "Hora_media_tarde",
+    "Hora_cena"
+  ];
+
+
+  function validateStep() {
+    let valid = true;
+    const currentStepElement = steps[currentStep];
+    const currentFields = currentStepElement.querySelectorAll("input, select, textarea");
+  
+    // Limpiar clases de error y alertas anteriores
+    currentFields.forEach(field => field.classList.remove("invalid"));
+  
+    const oldAlert = currentStepElement.querySelector(".form-alert-global");
+    if (oldAlert) oldAlert.remove();
+  
+    let errorMessages = [];
+  
+    for (const field of currentFields) {
+      const container = field.closest(".form-group");
+      const isHidden = container && getComputedStyle(container).display === "none";
+      if (isHidden) continue;
+    
+      const value = field.value.trim();
+    
+      // PRIMERA VALIDACIÓN: solo marcar campos vacíos, sin mensajes detallados
+      if (isFirstValidation) {
+        if (field.type !== "checkbox" && !value && !optionalFields.includes(field.name)) {
+          field.classList.add("invalid");
+          valid = false;
+        }
+        continue; // saltamos todo lo demás si es la primera validación
+      }
+  
+      // VALIDACIONES ESPECÍFICAS después de la primera validación
+      if (field.type !== "checkbox" && !value) {
+        if (!optionalFields.includes(field.name)) {
+          field.classList.add("invalid");
+          valid = false;
+          errorMessages.push("Por favor complete todos los campos.");
+          break;
+        }
+      }
+      
+  
+      if (field.type === "email") {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          field.classList.add("invalid");
+          valid = false;
+          errorMessages.push("Por favor ingresa un correo válido.");
+          break;
+        }
+      }
+  
+      if (field.type === "number") {
+        const numericValue = parseFloat(value);
+        if (isNaN(numericValue)) {
+          field.classList.add("invalid");
+          valid = false;
+          errorMessages.push(`El campo "${field.name}" debe ser un número.`);
+          break;
+        }
+      
+        // Validación específica para el campo de descanso
+        if (field.id === "id_Descanso" && numericValue > 24) {
+          field.classList.add("invalid");
+          valid = false;
+          errorMessages.push(`Ingrese una hora de descanso valida`);
+          break;
+        }
+      }
+      
+  
+      if (field.name.toLowerCase().includes("telefono")) {
+        const phoneRegex = /^[0-9]{7,15}$/;
+        if (!phoneRegex.test(value)) {
+          field.classList.add("invalid");
+          valid = false;
+          errorMessages.push("Por favor ingresa un número de teléfono válido.");
+          break;
+        }
+      }
+  
+      if (field.type === "date") {
+        const date = new Date(value);
+        if (isNaN(date.getTime())) {
+          field.classList.add("invalid");
+          valid = false;
+          errorMessages.push(`La fecha ingresada en "${field.name}" no es válida.`);
+          break;
+        }
+      }
+  
+      if (field.type === "time" && value) {
+        const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+        if (!timeRegex.test(value)) {
+          field.classList.add("invalid");
+          valid = false;
+          errorMessages.push(`La hora en "${field.name}" no es válida. Usa formato HH:MM.`);
+          break;
+        }
+      }
+      
+  
+      if (field.type === "radio") {
+        const name = field.name;
+        const radios = currentStepElement.querySelectorAll(`input[type="radio"][name="${name}"]`);
+        const isChecked = Array.from(radios).some(r => r.checked);
+        if (!isChecked) {
+          radios.forEach(radio => radio.classList.add("invalid"));
+          valid = false;
+          errorMessages.push(`Por favor complete todos los campos.`);
+          break;
+        }
+      }
+    }
+  
+    // Mostrar alerta si hay errores
+    if (!valid) {
+      const alert = document.createElement("li");
+      alert.className = "alert error form-alert-global";
+  
+      if (isFirstValidation) {
+        alert.innerText = "Por favor complete todos los campos.";
+      } else {
+        alert.innerText = errorMessages.join("\n");
+      }
+  
+      const lastField = currentFields[currentFields.length - 1];
+      const lastFormGroup = lastField.closest(".form-group");
+      lastFormGroup.insertAdjacentElement("afterend", alert);
+  
+      setTimeout(() => {
+        alert.style.transition = "opacity 0.5s ease-out";
+        alert.style.opacity = "0";
+        setTimeout(() => alert.remove(), 500);
+      }, 5000);
+    }
+  
+    isFirstValidation = false;
+    return valid;
+  }
+  
+
+  function nextPrev(direction) {
+    if (direction === 1 && !validateStep()) return;
+    currentStep += direction;
+    showStep(currentStep);
+  }
+
+  // Exponer funciones globales si se usan en HTML (ej: onclick)
+  window.nextPrev = nextPrev;
+  window.showStep = showStep;
+
+  // Mostrar el primer paso
+  showStep(currentStep);
+});
+
+
+//bloquear letras en el campo de telefono
+document.addEventListener("DOMContentLoaded", function () {
+  const telefonoInput = document.querySelector('input[name="Telefono"]');
+
+  if (telefonoInput) {
+    telefonoInput.addEventListener("input", function () {
+      this.value = this.value.replace(/\D/g, ""); // Reemplaza todo lo que no sea dígito
+    });
+  }
+});
+
+
+//mostrar macronutrientes seleccionados
+document.addEventListener('DOMContentLoaded', function () {
+    const select = document.getElementById('macronutrientes-select');
+    const container = document.getElementById('selected-items');
+    const hiddenInput = document.getElementById('macros-seleccionados');
+
+    let selectedItems = new Set();
+
+    function renderSelectedItems() {
+        container.innerHTML = '';
+        selectedItems.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'selected-item';
+            
+            div.innerHTML = `
+                ${item}
+                <span data-value="${item}" style="margin-left:8px; cursor:pointer; color:red;">&times;</span>
+            `;
+            container.appendChild(div);
+        });
+
+        hiddenInput.value = Array.from(selectedItems).join(',');
+
+        // Hacer que al dar click en la X se elimine del listado y vuelva al select
+        container.querySelectorAll('span[data-value]').forEach(span => {
+            span.addEventListener('click', function () {
+                const value = this.dataset.value;
+                selectedItems.delete(value);
+                restoreOption(value);
+                renderSelectedItems();
+            });
+        });
+    }
+
+    function restoreOption(value) {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+        sortSelectOptions(select);
+    }
+
+    function sortSelectOptions(select) {
+        const options = Array.from(select.options)
+            .filter(opt => opt.value !== '') // mantener "Seleccionar" arriba
+            .sort((a, b) => a.text.localeCompare(b.text));
+        
+        const firstOption = select.querySelector('option[value=""]');
+        select.innerHTML = ''; // limpia
+        if (firstOption) select.appendChild(firstOption); // reinserta "Seleccionar"
+        options.forEach(opt => select.appendChild(opt));
+    }
+
+    if (select) {
+        select.addEventListener('change', function () {
+            const selectedValue = this.value;
+            if (selectedValue && !selectedItems.has(selectedValue)) {
+                selectedItems.add(selectedValue);
+                // Eliminar el option seleccionado del select
+                this.querySelector(`option[value="${selectedValue}"]`)?.remove();
+                renderSelectedItems();
+            }
+            this.value = ''; // reinicia el select
+        });
+    }
+});
 

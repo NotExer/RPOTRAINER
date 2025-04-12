@@ -32,7 +32,7 @@ alimentacion = [
     ('3 veces','3 veces'),
     ('4 veces','4 veces'),
     ('5 veces','5 veces'),
-    ('mas de 5','mas de 5'),
+    ('mas de 5','mas de 5 veces'),
 ]
 
 alcohol = [
@@ -44,12 +44,12 @@ alcohol = [
 
 deseo_alimentacion = [
     ('', 'Seleccionar'),
-    ('1','1'),
-    ('2','2'),
-    ('3','3'),
-    ('4','4'),
-    ('5','5'),
-    ('mas de 5','mas de 5'),
+    ('1','1 vez'),
+    ('2','2 veces'),
+    ('3','3 veces'),
+    ('4','4 veces'),
+    ('5','5 veces'),
+    ('mas de 5','mas de 5 veces'),
 ]
 
 semana_deporte = [
@@ -87,6 +87,7 @@ macronutrientes = [
     ('Leche','Leche'),
     ('Yogurth (Griego, normal)','Yogurth (Griego, normal)'),
     ('Quesos','Quesos'),
+    ('Añadir','Añadir alimento'),
 ]
 
 suplementacion = [
@@ -113,6 +114,7 @@ frecuencia = [
 ]
 
 info_frecuencia = [
+    ('', 'Seleccionar'),
     ('Lunes','Lunes'),
     ('Martes','Martes'),
     ('Miercoles','Miercoles'),
@@ -123,6 +125,7 @@ info_frecuencia = [
 ]
 
 tiempo = [
+    ('', 'Seleccionar'),
     ('Menos de 30 minutos','Menos de 30 minutos'),
     ('30-45 minutos','30-45 minutos'),
     ('45-60 minutos','45-60 minutos'),
@@ -130,12 +133,14 @@ tiempo = [
 ]
 
 hora = [
+    ('', 'Seleccionar'),
     ('Mañana','Mañana'),
     ('Tarde','Tarde'),
     ('Noche','Noche'),
 ]
 
 objetivo = [
+    ('', 'Seleccionar'),
     ('Perder grasa','Perder grasa'),
     ('Ganar músculo','Ganar músculo'),
     ('Mejorar resistencia','Mejorar resistencia'),
@@ -144,6 +149,7 @@ objetivo = [
 ]
 
 entorno = [
+    ('', 'Seleccionar'),
     ('Gimnasio','Gimnasio'),
     ('Casa','Casa'),
     ('Exterior','Exterior'),
@@ -151,6 +157,7 @@ entorno = [
 ]
 
 info_equipamiento = [
+    ('', 'Seleccionar'),
     ('Mancuernas','Mancuernas'),
     ('Bandas de resistencia','Bandas de resistencia'),
     ('Máquinas de gimnasio','Máquinas de gimnasio'),
@@ -158,6 +165,7 @@ info_equipamiento = [
 ]
 
 servicio = [
+    ('', 'Seleccionar'),
     ('Entrenamiento personalizado','Entrenamiento personalizado'),
     ('Entrenamiento semipersonalizado','Entrenamiento semipersonalizado'),
     ('Entrenamiento online (videollamada)','Entrenamiento online (videollamada)'),
@@ -165,12 +173,14 @@ servicio = [
 ]
 
 duracion_asesoria = [
+    ('', 'Seleccionar'),
     ('3 Meses','3 Meses'),
     ('6 Meses','6 Meses'),
     ('12 Meses','12 Meses'),
 ]
 
 sesiones = [
+    ('', 'Seleccionar'),
     ('12 Sesiones','12 Sesiones'),
     ('16 Sesiones','16 Sesiones'),
     ('20 Sesiones','20 Sesiones'),
@@ -179,71 +189,70 @@ sesiones = [
 
 
 class Cliente(models.Model):
-    ClienteID = models.AutoField(primary_key=True) 
+    ClienteID = models.AutoField(primary_key=True)
     Nombre = models.CharField(max_length=100, blank=False, null=False)
     Nacimiento = models.DateField(blank=False, null=False)
     Edad = models.IntegerField(blank=False, null=False)
     Genero = models.CharField(max_length=20, choices=genero, blank=False, null=False)
     Correo = models.EmailField(blank=False, null=False)
-    Telefono = models.IntegerField(blank=False, null=False)
-
+    Telefono = models.CharField(max_length=15, blank=False, null=False)
     Direccion = models.TextField(blank=False, null=False)
     Divulgacion = models.CharField(max_length=100, choices=divulgacion, blank=False, null=False)
 #======================================================================================================================================================================================
     Altura = models.FloatField(blank=False, null=False)
     Peso = models.IntegerField(blank=False, null=False)
     Enfermedad = models.BooleanField(blank=False, null=False)
-    Info_enfermedad = models.CharField(max_length=100, blank=True, null=True)
+    Info_enfermedad = models.CharField(max_length=100, null=True, blank=True)
     Cirugia = models.BooleanField(default=None, blank=False, null=False)
-    Info_cirugia = models.CharField(max_length=100, blank=True, null=True)
+    Info_cirugia = models.CharField(max_length=100, null=True, blank=True)
     Dolor = models.BooleanField(default=None, blank=False, null=False)
-    Info_dolor = models.CharField(max_length=100, blank=True, null=True)
+    Info_dolor = models.CharField(max_length=100, null=True, blank=True)
     Medicamento = models.BooleanField(default=None, blank=False, null=False)
-    Info_medicamento = models.CharField(max_length=100, blank=True, null=True)
+    Info_medicamento = models.CharField(max_length=100, null=True, blank=True)
     Restricciones = models.BooleanField(default=None, blank=False, null=False)
-    Info_restricciones = models.CharField(max_length=100,blank=True, null=True)
+    Info_restricciones = models.CharField(max_length=100, null=True, blank=True)
     Descanso = models.IntegerField(blank=False, null=False)
     Fumas = models.BooleanField(default=None, blank=False, null=False)
     Alcohol = models.CharField(max_length=20, choices=alcohol, blank=False, null=False)
-    Chequeos = models.CharField(max_length=24, choices=chequeos, blank=False, null=False)  # max_length ajustado
+    Chequeos = models.CharField(max_length=24, choices=chequeos, blank=False, null=False)  
 #======================================================================================================================================================================================
     Rutina = models.TextField(blank=False, null=False)
     Alimentacion = models.CharField(max_length=20, choices=alimentacion, blank=False, null=False)
     Deseo_alimentacion = models.CharField(max_length=100, choices=deseo_alimentacion, blank=False, null=False)  # max_length añadido
-    Hora_desayuno = models.TimeField(blank=False, null=False)
-    Hora_media_manana = models.TimeField(blank=False, null=False)
-    Hora_almuerzo = models.TimeField(blank=False, null=False)
-    Hora_media_tarde = models.TimeField(blank=False, null=False)
-    Hora_cena = models.TimeField(blank=False, null=False)
+    Hora_desayuno = models.TimeField(default=None, blank=True, null=True)
+    Hora_media_manana = models.TimeField(default=None, blank=True, null=True)
+    Hora_almuerzo = models.TimeField(default=None, blank=True, null=True)
+    Hora_media_tarde = models.TimeField(default=None, blank=True, null=True)
+    Hora_cena = models.TimeField(default=None, blank=True, null=True)
     Agua = models.FloatField(blank=False, null=False)
     Deporte = models.BooleanField(default=None, blank=False, null=False )
-    Info_deporte = models.CharField(max_length=100, blank=True, null=True)
+    Info_deporte = models.CharField(max_length=100, blank=True, null=False)
     Semana_deporte = models.CharField(max_length=20, choices=semana_deporte, blank=False, null=False)  # max_length añadido
 #======================================================================================================================================================================================
     Nutricion =  models.BooleanField(default=None, blank=False, null=False)
-    Info_nutricion = models.CharField(max_length=100, blank=True, null=True)
+    Info_nutricion = models.CharField(max_length=100, blank=True, null=False)
     Alergia = models.BooleanField(default=None, blank=False, null=False)
-    Info_alergia = models.CharField(max_length=100, blank=True, null=True)
+    Info_alergia = models.CharField(max_length=100, blank=True, null=False)
     Dieta = models.BooleanField(default=None, blank=False, null=False)
-    Info_dieta = models.CharField(max_length=100, blank=True, null=True )
-    Macronutrientes = models.CharField(max_length=100, choices=macronutrientes, blank=False, null=False) 
+    Info_dieta = models.CharField(max_length=100, blank=True, null=False)
+    Macronutrientes = models.TextField(max_length=500,choices=macronutrientes,blank=True,null=True)
     Frutas_verduras = models.TextField(blank=False, null=False)
-    Evitaciones = models.BooleanField(blank=False, null=False)
-    Info_Evitaciones = models.CharField(max_length=100, blank=True, null=True)
+    Evitaciones = models.BooleanField(default=None, blank=False, null=False)
+    Info_evitaciones = models.BooleanField(default=None, blank=False, null=False)
     Suplementacion = models.CharField(max_length=250, choices=suplementacion, blank=False, null=False)  # max_length añadido
 #======================================================================================================================================================================================
     Entrenamientos = models.BooleanField(default=None, blank=False, null=False)
-    Info_entrenamientos = models.CharField(max_length=100, blank=True, null=True )
+    Info_entrenamientos = models.CharField(max_length=100, null=True, blank=True)
     Nivel = models.CharField(max_length=100, choices=nivel, blank=False, null=False)  # max_length añadido
     Frecuencia = models.CharField(max_length=100, choices=frecuencia, blank=False, null=False)  # max_length añadido
-    Info_frecuencia = models.CharField(max_length=100, choices=info_frecuencia, blank=True, null=True)  # max_length añadido
+    Info_frecuencia = models.CharField(max_length=100, choices=info_frecuencia, blank=True, null=False)  # max_length añadido
     Tiempo = models.CharField(max_length=20, choices=tiempo, blank=False, null=False)
     Hora = models.CharField(max_length=20, choices=hora, blank=False, null=False)  # max_length añadido
     Objetivo = models.CharField(max_length=100, choices=objetivo, blank=False, null=False)  # max_length añadido
-    Experiencia = models.BooleanField(default=False, blank=False, null=False)
+    Experiencia = models.BooleanField(blank=False, null=False)
     Entorno = models.CharField(max_length=100, choices=entorno, blank=False, null=False)  # max_length añadido
-    Equipamiento = models.BooleanField(default=False, blank=False, null=False)
-    Info_equipamiento = models.CharField(max_length=100, choices=info_equipamiento, blank=True, null=True )  # max_length añadido
+    Equipamiento = models.BooleanField(blank=False, null=False)
+    Info_equipamiento = models.CharField(max_length=100, choices=info_equipamiento, null=True, blank=True) # max_length añadido
     Disgusto = models.CharField(max_length=100, blank=False, null=False )
 #======================================================================================================================================================================================
     Servicio = models.CharField(max_length=100, choices=servicio, blank=False, null=False)  
@@ -257,3 +266,5 @@ class Cliente(models.Model):
     Fecha_inicio = models.DateField(blank=False, null=False)
     fecha_fin = models.DateField(blank=False, null=False)
     fecha_pago = models.DateField(blank=False, null=False)
+
+    

@@ -2,22 +2,17 @@
 
 {% block styles %}
 {{ block.super }}
-{% endblock %}
 
-{% block navbar %}
-{{ block.super }}
 {% endblock %}
 
 {% block content %}
 <section class="space container-fluid mt-4">
     <h3 class="custom-plans-title text-center text-light">Mis clientes</h3> 
 
-    <!-- Botón para crear un cliente nuevo -->
     <div class="text-center mb-3">
         <a href="{% url 'crear_cliente' %}" class="btn btn-primary">Crear Cliente Nuevo</a>
     </div>
 
-    <!-- Tabla responsiva con mejor estilo -->
     <div class="table-responsive">
         <table class="table table-bordered text-light w-100">
             <thead class="table-dark text-center">
@@ -33,16 +28,27 @@
             </thead>
             <tbody>
                 {% for cliente in cliente %}
+                
                 <tr>
-                    <td data-label="ID:">{{ cliente.ClienteID }}</td>
+                    <td data-label="ID:" >{{ cliente.ClienteID }}</td>
                     <td data-label="Nombre:">{{ cliente.Nombre }}</td>
-                    <td data-label="Sexo:">{{ cliente.Genero }}</td>
+                    <td data-label="Genero:">{{ cliente.Genero }}</td>
                     <td data-label="Edad:">{{ cliente.Edad }}</td>
-                    <td data-label="Objetivo físico:">{{ cliente.Objetivo }}</td>
-                    <td data-label="Patologías:">{{ cliente.Patologias }}</td>
-                    <td data-label="Acciones:">
+                    <td data-label="Objetivo:">{{ cliente.Objetivo }}</td>
+                    <td data-label="Patologías:">{{ cliente.Info_enfermedad }}</td>
+                    <td>
+                        <button class="vermas_button" onclick="abrir_modal('{% url 'detalle_cliente' cliente.ClienteID %}')">
+                            Ver más
+                        </button>
+                        <a href="{% url 'editar_cliente' cliente.ClienteID %}">
+                            <button class="editar_button">Editar</button>
+                        </a>
                         
+                        <button class="eliminar_button" onclick="abrir_modal('{% url 'eliminar_cliente' cliente.ClienteID %}')">
+                            Eliminar
+                        </button>
                     </td>
+                    
                 </tr>
                 {% empty %}
                 <tr>
@@ -54,7 +60,11 @@
     </div>
 </section>
 
+<!-- Aquí se cargará el modal -->
+<div id="modal-container"></div>
+{% endblock %}
+
 {% block scripts %}
 {{ block.super }}
-{% endblock %}
+
 {% endblock %}
