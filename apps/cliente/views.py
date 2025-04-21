@@ -22,7 +22,6 @@ class ClienteCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         form = context['form']
 
-        # Divide los campos en secciones (listas de nombres de campos)
         context['form_steps'] = [
             {
                 "title": "INFORMACIÓN PERSONAL",
@@ -70,7 +69,6 @@ class ClienteCreateView(CreateView):
                     'Contenido','Redes'
                 ]]
             },
-
             {
                 "title": "Fechas",
                 "fields": [form[name] for name in [
@@ -80,10 +78,12 @@ class ClienteCreateView(CreateView):
         ]
         return context
 
+    def form_valid(self, form):
+        macros = self.request.POST.get('macros_seleccionados')
+        form.instance.Macronutrientes = macros
+        return super().form_valid(form)
 
 
-from django.views.generic.edit import UpdateView
-from django.urls import reverse_lazy
 
 class ClienteUpdateView(UpdateView):
     model = Cliente

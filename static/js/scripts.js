@@ -144,16 +144,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //oculta y muestra campos segun seleccion de radio
 document.addEventListener('DOMContentLoaded', function () {
-  // Quitar el atributo 'required' de campos de hora
+  // Quitar el atributo 'required' de campos 
   const timeFieldIds = [
     'id_Hora_desayuno',
     'id_Hora_media_manana',
     'id_Hora_almuerzo',
     'id_Hora_media_tarde',
-    'id_Hora_cena'
+    'id_Hora_cena',
+    'Macronutrientes'
   ];
 
-  // Eliminar 'required' de los campos de hora
+  // Eliminar 'required' de los campos
   timeFieldIds.forEach(id => {
     const input = document.getElementById(id);
     if (input) {
@@ -219,7 +220,8 @@ document.addEventListener('DOMContentLoaded', function () {
       'Hora_media_manana',
       'Hora_almuerzo',
       'Hora_media_tarde',
-      'Hora_cena'
+      'Hora_cena',
+      'Macronutrientes'
     ];
 
     // Función para ajustar el 'required' según las respuestas
@@ -554,7 +556,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "Hora_media_manana",
     "Hora_almuerzo",
     "Hora_media_tarde",
-    "Hora_cena"
+    "Hora_cena",
+    "Macronutrientes"
   ];
 
 
@@ -595,6 +598,10 @@ document.addEventListener("DOMContentLoaded", () => {
           errorMessages.push("Por favor complete todos los campos.");
           break;
         }
+      }
+      
+      if (field.type !== "checkbox" && (!value || value === "None") && !optionalFields.includes(field.name)) {
+        allValid = false;
       }
       
   
@@ -725,70 +732,80 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-//mostrar macronutrientes seleccionados
+// mostrar macronutrientes seleccionados
 document.addEventListener('DOMContentLoaded', function () {
-    const select = document.getElementById('macronutrientes-select');
-    const container = document.getElementById('selected-items');
-    const hiddenInput = document.getElementById('macros-seleccionados');
+  const select = document.getElementById('Macronutrientes');
+  const container = document.getElementById('selected-items');
+  const hiddenInput = document.getElementById('macros-seleccionados');
+  const form = document.querySelector('form');
 
-    let selectedItems = new Set();
+  let selectedItems = new Set();
+  let removedItems = new Set(); // opcional, por si quieres usar esto después
 
-    function renderSelectedItems() {
-        container.innerHTML = '';
-        selectedItems.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'selected-item';
-            
-            div.innerHTML = `
-                ${item}
-                <span data-value="${item}" style="margin-left:8px; cursor:pointer; color:red;">&times;</span>
-            `;
-            container.appendChild(div);
-        });
+  function renderSelectedItems() {
+    container.innerHTML = '';
+    selectedItems.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'selected-item';
+      div.innerHTML = `
+        ${item}
+        <span data-value="${item}" style="margin-left:8px; cursor:pointer; color:red;">&times;</span>
+      `;
+      container.appendChild(div);
+    });
 
-        hiddenInput.value = Array.from(selectedItems).join(',');
+    // ✅ Actualiza el campo oculto
+    hiddenInput.value = Array.from(selectedItems).join(',');
 
-        // Hacer que al dar click en la X se elimine del listado y vuelva al select
-        container.querySelectorAll('span[data-value]').forEach(span => {
-            span.addEventListener('click', function () {
-                const value = this.dataset.value;
-                selectedItems.delete(value);
-                restoreOption(value);
-                renderSelectedItems();
-            });
-        });
-    }
+    // Agrega funcionalidad para quitar elementos
+    container.querySelectorAll('span[data-value]').forEach(span => {
+      span.addEventListener('click', function () {
+        const value = this.dataset.value;
+        selectedItems.delete(value);
+        removedItems.add(value);
+        restoreOption(value);
+        renderSelectedItems();
+      });
+    });
+  }
 
-    function restoreOption(value) {
-        const option = document.createElement('option');
-        option.value = value;
-        option.textContent = value;
-        select.appendChild(option);
-        sortSelectOptions(select);
-    }
+  function restoreOption(value) {
+    const option = document.createElement('option');
+    option.value = value;
+    option.textContent = value;
+    select.appendChild(option);
+    sortSelectOptions(select);
+  }
 
-    function sortSelectOptions(select) {
-        const options = Array.from(select.options)
-            .filter(opt => opt.value !== '') // mantener "Seleccionar" arriba
-            .sort((a, b) => a.text.localeCompare(b.text));
-        
-        const firstOption = select.querySelector('option[value=""]');
-        select.innerHTML = ''; // limpia
-        if (firstOption) select.appendChild(firstOption); // reinserta "Seleccionar"
-        options.forEach(opt => select.appendChild(opt));
-    }
+  function sortSelectOptions(select) {
+    const options = Array.from(select.options)
+      .filter(opt => opt.value !== '')
+      .sort((a, b) => a.text.localeCompare(b.text));
 
-    if (select) {
-        select.addEventListener('change', function () {
-            const selectedValue = this.value;
-            if (selectedValue && !selectedItems.has(selectedValue)) {
-                selectedItems.add(selectedValue);
-                // Eliminar el option seleccionado del select
-                this.querySelector(`option[value="${selectedValue}"]`)?.remove();
-                renderSelectedItems();
-            }
-            this.value = ''; // reinicia el select
-        });
-    }
+    const firstOption = select.querySelector('option[value=""]');
+    select.innerHTML = '';
+    if (firstOption) select.appendChild(firstOption);
+    options.forEach(opt => select.appendChild(opt));
+  }
+
+  if (select) {
+    select.addEventListener('change', function () {
+      const selectedValue = this.value;
+      if (selectedValue && !selectedItems.has(selectedValue)) {
+        selectedItems.add(selectedValue);
+        removedItems.delete(selectedValue);
+        this.querySelector(`option[value="${selectedValue}"]`)?.remove();
+        renderSelectedItems();
+      }
+      this.value = '';
+    });
+  }
+
+  // ✅ Asegura que el input oculto tenga el valor actualizado al enviar
+  if (form) {
+    form.addEventListener('submit', function () {
+      hiddenInput.value = Array.from(selectedItems).join(',');
+    });
+  }
 });
 

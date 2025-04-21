@@ -39,8 +39,9 @@
                 
                 {% if field.name == "Macronutrientes" %}
                   {{ field }}
-                  <div id="selected-items" class="mt-2"></div>
+                  <div id="selected-items" class="mt-2">
                   <input type="hidden" name="macros_seleccionados" id="macros-seleccionados">
+                </div>
                 {% else %}
                   {{ field }}
                 {% endif %}
