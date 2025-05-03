@@ -188,6 +188,7 @@ sesiones = [
 
 
 
+
 class Cliente(models.Model):
     ClienteID = models.AutoField(primary_key=True)
     Nombre = models.CharField(max_length=100, blank=False, null=False)
@@ -219,11 +220,11 @@ class Cliente(models.Model):
     Rutina = models.TextField(blank=False, null=False)
     Alimentacion = models.CharField(max_length=20, choices=alimentacion, blank=False, null=False)
     Deseo_alimentacion = models.CharField(max_length=100, choices=deseo_alimentacion, blank=False, null=False)  # max_length añadido
-    Hora_desayuno = models.TimeField(default=None, blank=True, null=True)
-    Hora_media_manana = models.TimeField(default=None, blank=True, null=True)
-    Hora_almuerzo = models.TimeField(default=None, blank=True, null=True)
-    Hora_media_tarde = models.TimeField(default=None, blank=True, null=True)
-    Hora_cena = models.TimeField(default=None, blank=True, null=True)
+    Hora_desayuno = models.CharField(max_length=20, default=None, blank=True, null=True)
+    Hora_media_manana = models.CharField(max_length=20, default=None, blank=True, null=True)
+    Hora_almuerzo = models.CharField(max_length=20, default=None, blank=True, null=True)
+    Hora_media_tarde = models.CharField(max_length=20, default=None, blank=True, null=True)
+    Hora_cena = models.CharField(max_length=20, default=None, blank=True, null=True)
     Agua = models.FloatField(blank=False, null=False)
     Deporte = models.BooleanField(default=None, blank=False, null=False )
     Info_deporte = models.CharField(max_length=100, blank=True, null=False)
@@ -235,7 +236,7 @@ class Cliente(models.Model):
     Info_alergia = models.CharField(max_length=100, blank=True, null=False)
     Dieta = models.BooleanField(default=None, blank=False, null=False)
     Info_dieta = models.CharField(max_length=100, blank=True, null=False)
-    Macronutrientes = models.TextField(max_length=500, default=None, choices=macronutrientes, blank=True, null=True)
+    Macronutrientes = models.CharField(max_length=500, default=None, choices=macronutrientes, blank=False, null=False)
     Frutas_verduras = models.TextField(blank=False, null=False)
     Evitaciones = models.BooleanField(default=None, blank=False, null=False)
     Info_evitaciones = models.BooleanField(default=None, blank=False, null=False)

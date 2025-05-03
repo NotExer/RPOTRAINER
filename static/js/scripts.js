@@ -311,7 +311,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-
 //calendario personalizado
 document.addEventListener('DOMContentLoaded', () => {
   const dateInputs = document.querySelectorAll('.datepicker');
@@ -450,7 +449,6 @@ calendar.appendChild(dayHeader);
     }
   }
 });
-
 
 //abre modal de formulario
 document.addEventListener('DOMContentLoaded', function () {
@@ -749,7 +747,7 @@ document.addEventListener('DOMContentLoaded', function () {
       div.className = 'selected-item';
       div.innerHTML = `
         ${item}
-        <span data-value="${item}" style="margin-left:8px; cursor:pointer; color:red;">&times;</span>
+        <span data-value="${item}" style="margin-left:8px; cursor:pointer; color:#FFD85C;">&times;</span>
       `;
       container.appendChild(div);
     });
@@ -809,3 +807,84 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+
+document.addEventListener('DOMContentLoaded', () => {
+  const inputs = document.querySelectorAll('.custom-timepicker');
+
+  inputs.forEach(input => {
+    input.addEventListener('focus', () => showTimeSelector(input));
+  });
+
+  function showTimeSelector(input) {
+    removeExistingSelector();
+
+    const container = document.createElement('div');
+    container.className = 'time-selector-popup';
+
+    const hourSelect = document.createElement('select');
+    for (let h = 1; h <= 12; h++) {
+      const option = document.createElement('option');
+      option.value = String(h).padStart(2, '0'); // hora con dos dígitos
+      option.textContent = String(h).padStart(2, '0');
+      hourSelect.appendChild(option);
+    }
+
+    const minuteSelect = document.createElement('select');
+    [0, 15, 30, 45].forEach(m => {
+      const option = document.createElement('option');
+      option.value = String(m).padStart(2, '0'); // minuto con dos dígitos
+      option.textContent = String(m).padStart(2, '00');
+      minuteSelect.appendChild(option);
+    });
+
+    const periodSelect = document.createElement('select');
+    ['AM', 'PM'].forEach(period => {
+      const option = document.createElement('option');
+      option.value = period;
+      option.textContent = period;
+      periodSelect.appendChild(option);
+    });
+
+    const setBtn = document.createElement('button');
+    setBtn.textContent = 'Establecer';
+    setBtn.style.marginTop = '10px';
+    setBtn.addEventListener('click', () => {
+      const hour = hourSelect.value;
+      const minute = minuteSelect.value;
+      const period = periodSelect.value;
+      input.value = `${hour}:${minute} ${period}`;
+      removeExistingSelector();
+    });
+
+    container.appendChild(hourSelect);
+    container.appendChild(minuteSelect);
+    container.appendChild(periodSelect);
+    container.appendChild(setBtn);
+
+    document.body.appendChild(container);
+
+    const rect = input.getBoundingClientRect();
+    container.style.position = 'absolute';
+    container.style.top = `${rect.bottom + window.scrollY + 5}px`;
+    container.style.left = `${rect.left + window.scrollX}px`;
+    container.style.background = '#1e1e1e';
+    container.style.padding = '10px';
+    
+    container.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
+    container.style.zIndex = 10;
+
+    document.addEventListener('click', outsideClick);
+  }
+
+  function removeExistingSelector() {
+    const popup = document.querySelector('.time-selector-popup');
+    if (popup) popup.remove();
+    document.removeEventListener('click', outsideClick);
+  }
+
+  function outsideClick(e) {
+    if (!e.target.closest('.time-selector-popup') && !e.target.classList.contains('custom-timepicker')) {
+      removeExistingSelector();
+    }
+  }
+});

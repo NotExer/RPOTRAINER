@@ -78,10 +78,13 @@ class ClienteCreateView(CreateView):
         ]
         return context
 
-    def form_valid(self, form):
-        macros = self.request.POST.get('macros_seleccionados')
-        form.instance.Macronutrientes = macros
-        return super().form_valid(form)
+    def post(self, request, *args, **kwargs):
+
+        request.POST = request.POST.copy()
+        selected_macros_str = request.POST.get('macros_seleccionados', '')
+        request.POST['Macronutrientes'] = selected_macros_str
+        return super().post(request, *args, **kwargs)
+
 
 
 

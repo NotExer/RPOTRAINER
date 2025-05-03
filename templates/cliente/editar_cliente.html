@@ -23,19 +23,29 @@
               {% if field_name in "Info_enfermedad,Info_cirugia,Info_dolor,Info_medicamento,Info_restricciones,Info_deporte,Info_nutricion,Info_alergia,Info_dieta,Info_evitaciones,Info_entrenamientos,Info_equipamiento" %}
                 <div id="group_{{ field_name }}" class="form-group">
                   {% if field.errors %}
+                  <div id="selected-items" class="mt-2"></div>
+
                     <div class="error">{{ field.errors }}</div>
                   {% endif %}
                   {{ field.label_tag }}
                   {{ field }}
                 </div>
               {% else %}
-                <div class="form-group">
-                  {% if field.errors %}
-                    <div class="error">{{ field.errors }}</div>
-                  {% endif %}
-                  {{ field.label_tag }}
+              <div class="form-group">
+                {% if field.errors %}
+                  <div class="error">{{ field.errors }}</div>
+                {% endif %}
+                {{ field.label_tag }}
+                
+                {% if field.name == "Macronutrientes" %}
                   {{ field }}
+                  <div id="selected-items" class="mt-2">
+                  <input type="hidden" name="macros_seleccionados" id="macros-seleccionados">
                 </div>
+                {% else %}
+                  {{ field }}
+                {% endif %}
+              </div>              
               {% endif %}
             {% endwith %}
           {% endfor %}
@@ -45,8 +55,8 @@
       </div>
     
       <div class="step-buttons">
-        <button type="button" id="prevBtn" onclick="nextPrev(-1)" style="display: none;">Anterior</button>
-        <button type="button" id="nextBtn" onclick="nextPrev(1)">Siguiente</button>
+        <button type="button" class="form_button" id="prevBtn" onclick="nextPrev(-1)" style="display: none;">Anterior</button>
+        <button type="button" class="form_button" id="nextBtn" onclick="nextPrev(1)">Siguiente</button>
         <button type="submit" id="submitBtn">Enviar</button>
       </div>
     </form>
