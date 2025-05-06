@@ -1,11 +1,13 @@
 <div class="modal" id="modal">
   <div class="modal-content-detalle">
-   <div class="modal_header text-white">Detalles de {{ object.Nombre }}</div>
+    <div class="modal_header text-white">Detalles de {{ object.Nombre }}</div>
+    <p class="detalle_title">Información personal</p>
     <hr class="divider">
- 
     <form method="post" action="{% url 'eliminar_cliente' object.ClienteID %}" class="form-reset">
     {% csrf_token %}
+
     <div class="response-group">
+        
         <p class="text-response" data-label="ID de cliente:" data-value="{{ object.ClienteID }}"></p>
         <p class="text-response" data-label="Nombre:" data-value="{{ object.Nombre }}"></p>
         <p class="text-response" data-label="Fecha de nacimiento:" data-value="{{ object.Nacimiento }}"></p>
@@ -16,6 +18,7 @@
         <p class="text-response" data-label="Direccion:" data-value="{{ object.Direccion }}"></p>
         <p class="text-response" data-label="Divulgacion:" data-value="{{ object.Divulgacion }}"></p>
       </div>
+      <p class="detalle_title">Salud</p>
       <hr class="divider">
       <div class="response-group">
         <p class="text-response" data-label="Altura:" data-value="{{ object.Altura }}"></p>
@@ -64,6 +67,7 @@
         <p class="text-response" data-label="Consume alcohol:" data-value="{{ object.Alcohol }}"></p>
         <p class="text-response" data-label="Frecuencia de chequeos medicos:" data-value="{{ object.Chequeos }}"></p>
       </div>
+      <p class="detalle_title">Habitos</p>
       <hr class="divider">
       <div class="response-group">
         <p class="text-response" data-label="Descripcion de Rutina:" data-value="{{ object.Rutina }}"></p>
@@ -88,6 +92,7 @@
 
         <p class="text-response" data-label="Frecuencia semanal de deporte:" data-value="{{ object.Semana_deporte }}"></p>
       </div>
+      <p class="detalle_title">Nutrición</p>
       <hr class="divider">
       <div class="response-group">
         <p class="text-response" data-label="Historial de Nutricion:" data-value="{% if object.Nutricion %}Sí{% else %}No{% endif %}"></p>
@@ -124,6 +129,7 @@
         <p class="text-response" data-label="Alimentos a evitar:" data-value="{{ object.Info_Evitaciones }}"></p>
         <p class="text-response" data-label="Desea suplementacion:" data-value="{{ object.Suplementacion }}"></p>
       </div>
+      <p class="detalle_title">Entrenamiento</p>
       <hr class="divider">
       <div class="response-group">
 
@@ -159,6 +165,7 @@
 
         <p class="text-response" data-label="Disgusto de entrenamiento:" data-value="{{ object.Disgusto }}"></p>
       </div>
+      <p class="detalle_title">Servicio contratado</p>
       <hr class="divider">
       <div class="response-group">
         <p class="text-response" data-label="Servicio seleccionado:" data-value="{{ object.Servicio }}"></p>
@@ -166,11 +173,13 @@
         <p class="text-response" data-label="Numero de sesiones:" data-value="{{ object.Sesiones }}"></p>
         <p class="text-response" data-label="Comentarios y preferencias:" data-value="{{ object.Preferencias }}"></p>
       </div>
+      <p class="detalle_title">Redes sociales</p>
       <hr class="divider">
       <div class="response-group">
         <p class="text-response" data-label="Contenido en redes:" data-value="{{ object.Contenido }}"></p>
         <p class="text-response" data-label="Perfiles en redes:" data-value="{{ object.Redes }}"></p>
       </div>
+      <p class="detalle_title">Fechas</p>
       <hr class="divider">
       <div class="response-group">
         <p class="text-response" data-label="Fecha de inicio:" data-value="{{ object.Fecha_inicio }}"></p>

@@ -36,16 +36,20 @@
                   <div class="error">{{ field.errors }}</div>
                 {% endif %}
                 {{ field.label_tag }}
-                
+              
                 {% if field.name == "Macronutrientes" %}
-                  {{ field }}
-                  <div id="selected-items">
-                  <input type="hidden" name="macros_seleccionados" id="macros-seleccionados">
-                </div>
+                  {{ field }} <!-- <select> aún visible -->
+              
+                  <!-- input hidden para sobrescribir el valor del select -->
+                  <input type="hidden" name="Macronutrientes" id="macros-seleccionados">
+              
+                  <!-- contenedor visual de los ítems seleccionados -->
+                  <div id="selected-items"></div>
                 {% else %}
                   {{ field }}
                 {% endif %}
-              </div>              
+              </div>
+                 
               {% endif %}
             {% endwith %}
           {% endfor %}
@@ -62,4 +66,3 @@
     </form>
 </section>
 {% endblock %}
-

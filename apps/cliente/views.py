@@ -78,12 +78,12 @@ class ClienteCreateView(CreateView):
         ]
         return context
 
-    def post(self, request, *args, **kwargs):
+def form_valid(self, form):
+    macros = self.request.POST.get('Macronutrientes')
+    form.instance.Macronutrientes = macros
+    return super().form_valid(form)
 
-        request.POST = request.POST.copy()
-        selected_macros_str = request.POST.get('macros_seleccionados', '')
-        request.POST['Macronutrientes'] = selected_macros_str
-        return super().post(request, *args, **kwargs)
+
 
 
 
@@ -91,14 +91,13 @@ class ClienteCreateView(CreateView):
 class ClienteUpdateView(UpdateView):
     model = Cliente
     form_class = Clienteform
-    template_name = 'cliente/editar_cliente.html'  # Puedes usar el mismo si quieres
+    template_name = 'cliente/editar_cliente.html'
     success_url = reverse_lazy('lista_cliente')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         form = context['form']
 
-        # Usamos los mismos pasos que en la vista de crear
         context['form_steps'] = [
             {
                 "title": "INFORMACIÓN PERSONAL",
@@ -154,6 +153,11 @@ class ClienteUpdateView(UpdateView):
             },
         ]
         return context
+
+    def form_valid(self, form):
+        macros = self.request.POST.get('macros_seleccionados')
+        form.instance.Macronutrientes = macros
+        return super().form_valid(form)
 
 
 

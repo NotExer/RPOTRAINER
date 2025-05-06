@@ -738,7 +738,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('form');
 
   let selectedItems = new Set();
-  let removedItems = new Set(); // opcional, por si quieres usar esto después
 
   function renderSelectedItems() {
     container.innerHTML = '';
@@ -752,21 +751,11 @@ document.addEventListener('DOMContentLoaded', function () {
       container.appendChild(div);
     });
 
-    // ✅ Actualiza el campo oculto
+    // Actualiza el input oculto
     hiddenInput.value = Array.from(selectedItems).join(',');
-
-    // Agrega funcionalidad para quitar elementos
-    container.querySelectorAll('span[data-value]').forEach(span => {
-      span.addEventListener('click', function () {
-        const value = this.dataset.value;
-        selectedItems.delete(value);
-        removedItems.add(value);
-        restoreOption(value);
-        renderSelectedItems();
-      });
-    });
   }
 
+  // Restaura una opción al <select>
   function restoreOption(value) {
     const option = document.createElement('option');
     option.value = value;
@@ -775,6 +764,7 @@ document.addEventListener('DOMContentLoaded', function () {
     sortSelectOptions(select);
   }
 
+  // Ordena las opciones alfabéticamente
   function sortSelectOptions(select) {
     const options = Array.from(select.options)
       .filter(opt => opt.value !== '')
@@ -791,21 +781,31 @@ document.addEventListener('DOMContentLoaded', function () {
       const selectedValue = this.value;
       if (selectedValue && !selectedItems.has(selectedValue)) {
         selectedItems.add(selectedValue);
-        removedItems.delete(selectedValue);
         this.querySelector(`option[value="${selectedValue}"]`)?.remove();
         renderSelectedItems();
       }
-      this.value = '';
+      this.value = ''; // limpia la selección
     });
   }
 
-  // ✅ Asegura que el input oculto tenga el valor actualizado al enviar
+  // Al enviar el formulario, asegura que el input oculto tenga los valores correctos
   if (form) {
     form.addEventListener('submit', function () {
       hiddenInput.value = Array.from(selectedItems).join(',');
     });
   }
+
+  // Para permitir quitar ítems seleccionados
+  container.addEventListener('click', function (e) {
+    if (e.target.tagName === 'SPAN' && e.target.dataset.value) {
+      const value = e.target.dataset.value;
+      selectedItems.delete(value);
+      restoreOption(value);
+      renderSelectedItems();
+    }
+  });
 });
+
 
 
 document.addEventListener('DOMContentLoaded', () => {

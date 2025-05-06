@@ -236,7 +236,7 @@ class Cliente(models.Model):
     Info_alergia = models.CharField(max_length=100, blank=True, null=False)
     Dieta = models.BooleanField(default=None, blank=False, null=False)
     Info_dieta = models.CharField(max_length=100, blank=True, null=False)
-    Macronutrientes = models.CharField(max_length=500, default=None, choices=macronutrientes, blank=False, null=False)
+    Macronutrientes = models.CharField(max_length=500, default=None, choices=macronutrientes, blank=False, null=True)
     Frutas_verduras = models.TextField(blank=False, null=False)
     Evitaciones = models.BooleanField(default=None, blank=False, null=False)
     Info_evitaciones = models.BooleanField(default=None, blank=False, null=False)

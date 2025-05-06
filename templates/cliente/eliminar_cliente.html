@@ -2,7 +2,7 @@
   <div class="modal-content-delete">
     <div class="modal_header text-white">Advertencia</div>
     <hr class="divider">
-    <h5 class="text-white mb-3">¿Eliminar a {{ object.Nombre }}?</h5>
+    <h5 class="text-white">¿Eliminar a {{ object.Nombre }}?</h5>
 
     <form method="post" action="{% url 'eliminar_cliente' object.ClienteID %}" class="form-reset">
       {% csrf_token %}

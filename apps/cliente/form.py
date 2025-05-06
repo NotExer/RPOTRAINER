@@ -158,7 +158,7 @@ class Clienteform(forms.ModelForm):
         
         widgets = {
             'Nombre': forms.TextInput(attrs={'class': 'input-user'}),
-            'Nacimiento': forms.DateInput(attrs={'class': 'custom-date datepicker','type': 'text','readonly': 'readonly','placeholder': 'Selecciona una fecha'}),
+            'Nacimiento': forms.DateInput(attrs={'class': 'custom-date datepicker','type': 'text','readonly': 'readonly'}),
             'Edad': forms.NumberInput(attrs={'class': 'input-user','min': '0','oninput': "this.value = this.value.replace(/[^0-9]/g, '');",'step': '1','inputmode': 'numeric' }),
             'Genero': forms.Select(attrs={'class': 'form-select'}),
             'Correo': forms.EmailInput(attrs={'class': ' input-user'}),
@@ -200,7 +200,7 @@ class Clienteform(forms.ModelForm):
             'Info_alergia': forms.TextInput(attrs={'class': 'input-user'}),
             'Dieta': forms.RadioSelect(choices=[(True, "Sí"), (False, "No")],attrs={'class': 'radio-custom'}),
             'Info_dieta': forms.TextInput(attrs={'class': 'input-user'}),
-            'Macronutrientes': forms.Select(attrs={'class': 'input-user' , 'id': 'Macronutrientes'}),
+            'Macronutrientes': forms.Select(attrs={'class': 'input-user', 'id': 'Macronutrientes'}),
             'Frutas_verduras': forms.TextInput(attrs={'class': 'input-user'}),
             'Evitaciones': forms.RadioSelect(choices=[(True, "Sí"), (False, "No")],attrs={'class': 'radio-custom'}),
             'Info_evitaciones': forms.TextInput(attrs={'class': 'input-user'}),
